@@ -57,7 +57,7 @@ public class LoginBean  implements Serializable {
 //            System.out.println("is Admin : "+request.isUserInRole("ROLE_ADMIN"));
             isAdmin = true;
             
-            return "/pages/envioMsj/envioAlerta.xhtml";
+            return "loginOK";
                 } catch (IllegalArgumentException ie)  {
                         System.out.println("Login Failed on IllegalArgumentException");
                         System.out.println(ie.getMessage());
