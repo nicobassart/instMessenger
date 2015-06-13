@@ -9,7 +9,7 @@
 <h:head>
 	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
 	<title>Edit Auth Page</title>
-	 
+
 </h:head>
 
 <body>
@@ -18,7 +18,7 @@
 
 			<ui:define name="body">
 				<h:form id="form">
-			
+
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
 
 					<p:panel header="Envío de Alertas" style="height:470px">
@@ -29,23 +29,26 @@
 
 								<p:layout id="layout" style="height:350px">
 
-									<p:layoutUnit position="west" resizable="false" size="150" maxSize="200">
+									<p:layoutUnit position="west" resizable="false" size="150"
+										maxSize="200">
 										<p:column>Agendas</p:column>
 										<br></br>
 										<br></br>
-										<p:selectOneMenu required="false"	value="#{personaBean.selectedAgenda}">
+										<p:selectOneMenu required="false"
+											value="#{personaBean.selectedAgenda}">
 											<f:selectItem itemLabel="Seleccionar" itemValue="" />
 											<f:selectItems value="#{agendaBean.agendas}" var="agenda"
 												itemValue="#{agenda.nombre}" itemLabel="#{agenda.nombre}" />
 										</p:selectOneMenu>
 										<br></br>
 										<br></br>
-									
+
 										<p:commandButton value="Agregar Agenda" id="btnAgregarAgenda"
-											actionListener="#{personaBean.agregarPersonas}" update=":form:personasList"/>
-											
+											actionListener="#{personaBean.agregarPersonas}"
+											update=":form:personasList" />
+
 									</p:layoutUnit>
- 									  
+
 									<p:layoutUnit position="center">
 
 										<p:panel id="pnlDestMsj" header="Destinatarios del Mensaje"
@@ -67,10 +70,10 @@
 																value="#{persona.apellido}, #{persona.nombre}" />
 														</f:facet>
 														<f:facet name="input">
-															<h:inputText value="#{persona.apellido}" id="apellido"/>
-															<p:watermark for="apellido" value="Apellido" />  
-															<h:inputText value="#{persona.nombre}" id="nombre"/>
-															<p:watermark for="nombre" value="Nombre" />  
+															<h:inputText value="#{persona.apellido}" id="apellido" />
+															<p:watermark for="apellido" value="Apellido" />
+															<h:inputText value="#{persona.nombre}" id="nombre" />
+															<p:watermark for="nombre" value="Nombre" />
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
@@ -80,8 +83,9 @@
 															<h:outputText value="#{persona.celular}" />
 														</f:facet>
 														<f:facet name="input">
-															<h:inputText value="#{persona.celular}"	style="width:100%" id="celular"/>
-															<p:watermark for="celular" value="Celular" />  
+															<h:inputText value="#{persona.celular}"
+																style="width:100%" id="celular" />
+															<p:watermark for="celular" value="Celular" />
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
@@ -149,10 +153,10 @@
 						</p:wizard>
 					</p:panel>
 				</h:form>
-				
+
 			</ui:define>
 		</ui:composition>
-		
+
 	</f:view>
 
 </body>
