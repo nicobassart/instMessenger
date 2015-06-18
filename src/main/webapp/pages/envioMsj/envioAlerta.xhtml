@@ -21,13 +21,13 @@
 
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
 
-					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:600px">
+					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%">
 
 						<p:wizard flowListener="#{personaBean.onFlowProcess}">
 
 							<p:tab id="cargaPersonas" title="Contactos" titletip="Crea contactos o agregalo desde tus agendas.">
 
-								<p:layout  >
+								<p:layout id="tuhermana"  style="height:250px">
 
 									<p:layoutUnit position="center">
 
@@ -107,7 +107,7 @@
 										<p:blockUI block="pnlDestMsj"
 											trigger=":form:personasList:btnNuevoDest,:form:btnAgregarAgenda">
 													Un momento por favor...<br />
-											<p:graphicImage value="http://imgsms.techresources.com.ar//ajax-loader.gif" />
+											<p:graphicImage value="http://imgsms.techresources.com.ar/ajax-loader.gif" />
 										</p:blockUI>
 									</p:layoutUnit>
 									
