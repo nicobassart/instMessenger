@@ -37,12 +37,12 @@
 
 	<context-param>  
 	    <param-name>primefaces.THEME</param-name>  
-	    <param-value>bootstrap</param-value>  
+	    <param-value>cupertino</param-value>  
 	</context-param>
 	
 	<!-- Welcome Page -->
 	<welcome-file-list>
-		<welcome-file>inicio.html</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<filter>
@@ -61,9 +61,6 @@
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	<welcome-file-list>
-        <welcome-file>/login.xhtml</welcome-file>
-    </welcome-file-list>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

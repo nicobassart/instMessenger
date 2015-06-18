@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.instMessenger.entity.Persona;
 
-@ManagedBean
-@RequestScoped
-@Component
+@Named
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
+
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 2868742783741899100L;

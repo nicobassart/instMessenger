@@ -10,8 +10,14 @@
             	<intercept-url pattern="/imgs*"  access="ROLE_ANONYMOUS" />
                 <form-login login-page="/login.xhtml" default-target-url="/pages/envioMsj/main.xhtml"
                         authentication-failure-url="/error.xhtml"  />
-                <logout  logout-url="/logout"  invalidate-session="true" logout-success-url="/login.xhtml"/>
+				<logout logout-url="/logout.xhtml" invalidate-session="true"
+					logout-success-url="/login.xhtml" delete-cookies="JSESSIONID" />
+
                 <intercept-url pattern="/pages/**" access="ROLE_ADMIN,ROLE_USER" />
+				<session-management invalid-session-url="/login.xhtml">
+					<concurrency-control max-sessions="1"
+						error-if-maximum-exceeded="true" expired-url="/login.xhtml" />
+				</session-management>
         </http>
         
         

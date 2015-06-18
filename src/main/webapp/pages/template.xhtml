@@ -17,11 +17,18 @@
 </h:head>
 
 <body id="pgMainMenu">
- 	<ui:include src="header.xhtml" />
-	<ui:include src="menu_lateral.xhtml" />
- 	<ui:insert name="body" />
-	<ui:include src="footer.xhtml" />
-
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="95"  resizable="true" >
+			<ui:include src="header.xhtml" />
+		</p:layoutUnit>
+		<!-- ui:include src="menu_lateral.xhtml" /-->
+		<p:layoutUnit position="south" size="50"  resizable="true" >
+			<ui:include src="footer.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<ui:insert name="body" />
+		</p:layoutUnit>
+	</p:layout>
 </body>
 
 </html>

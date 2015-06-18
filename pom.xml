@@ -232,7 +232,7 @@
 		</repository>
 	</repositories>
 	<build>
-		<finalName>instMessenger</finalName>
+		<finalName>ROOT</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
