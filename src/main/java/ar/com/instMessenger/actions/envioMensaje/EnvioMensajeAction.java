@@ -42,13 +42,13 @@ public class EnvioMensajeAction extends Action implements IEnvioMensajeAction {
 	MessageProperties messageProperties = new MessageProperties();
 	for (Persona persona : personaBean.getPersonas()) {
 
-	    messageProperties.setHeader("telefono", persona.getCelular());
-
-	    MessageConverter converter = new SimpleMessageConverter();
-	    String texto1 = this.armarSMS(this.texto, persona);
-	    org.springframework.amqp.core.Message message = converter.toMessage(texto1, messageProperties);
-
-	    template.convertAndSend(message);
+//	    messageProperties.setHeader("telefono", persona.getCelular());
+//
+//	    MessageConverter converter = new SimpleMessageConverter();
+//	    String texto1 = this.armarSMS(this.texto, persona);
+//	    org.springframework.amqp.core.Message message = converter.toMessage(texto1, messageProperties);
+//
+//	    template.convertAndSend(message);
 	    servicioColas.encolarMensaje(utilsBean.reemplazarContenido(this.texto, persona), persona.getCelular());
 	}
 
