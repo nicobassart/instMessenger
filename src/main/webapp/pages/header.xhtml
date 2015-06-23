@@ -6,13 +6,37 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
-<body>
-		<a href="http://www.techresources.com.ar" target="blank" style="text-align: left;"><img src="http://imgsms.techresources.com.ar/logo.png" /></a>
-
-		<p:button href="/logout" value="SALIR"/>
-		<!-- <img src="http://imgsms.techresources.com.ar/salir.png"/> -->
+	<style type="text/css">
+		.right {
+			display: inline;
+			float: right;
+			padding: 4px;
+		}
 		
-</body>
-
+		.center {
+			display: inline;
+			padding: 4px;
+			font-family: 'Orbitron';
+			font-size: 30px;
+			text-shadow: 1px 1px 1px #aaa;
+		}
+		
+		.left {
+			padding: 2px;
+			display: inline;
+		}
+	</style>
+	<h:form>
+	<div class="left">
+		<a href="http://www.techresources.com.ar" target="blank"><img
+			src="http://img.mensajeados.com.ar/logo_mensajeados.png" /></a>
+	</div>
+	<div class="center">MENSAJEADOS</div>
+	
+	<div class="right">
+ 		<p:commandLink action="#{loginBean.logout}" oncomplete="salirDialog.show()">
+			<h:graphicImage value="http://img.mensajeados.com.ar/salir3.png"  />
+		</p:commandLink>
+	</div>
+	</h:form>
 </html>

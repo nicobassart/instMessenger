@@ -16,10 +16,10 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png" />
 
-    <title>Mega Phone</title>
+    <title>Mensajeados</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="http://css.mensajeados.com.ar/bootstrap.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
     <link href="custom/css/signin.css" rel="stylesheet"  />
@@ -39,13 +39,13 @@
     <div class="container">
 
       <h:form id="formLogin" class="form-signin" role="form">
-        <h2 class="form-signin-heading">Ingreso</h2>
+        <h2 class="form-signin-heading">INGRESO</h2>
         <h:inputText name="username" id="j_username" value="#{loginBean.userName}" type="text" class="form-control" placeholder="Usuario" required="true" autofocus="true" />
         <h:inputSecret name="password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Recordar</input>
         </label>
-        <p:commandButton type="submit" id="login" action="#{loginBean.login}" value="Ingresar" styleClass="btn btn-lg btn-primary btn-block" />
+        <p:commandButton type="submit" id="login" action="#{loginBean.login}" value="Iniciar" styleClass="btn btn-lg btn-primary btn-block" />
      </h:form>
 
     </div> <!-- /container -->

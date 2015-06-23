@@ -18,17 +18,19 @@
 			<ui:define name="body">
 				<h:form id="form">
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
-					<p:panel header="Envío de Alertas" style="height:470px">
-						<p:layout id="layout" style="height:350px">
+					<p:panel header="Envío de Alertas" style="height:100%;text-align:center">
+						<p:layout id="layout" style="height:400px">
 							<p:layoutUnit position="center">
-								<p:panel header="Destinatarios del Mensaje" style="border:0">
+								<p:panel header="El mensaje fue enviados a los siguientes destinatarios" style="border:0">
 									<h:messages errorClass="error" />
 									<p:dataTable var="persona" value="#{personaBean.personas}"
 										selection="#{personaBean.selectedPersonas}" id="personasList"
 										editable="true" rowKey="#{persona.nombre}"
 										rowIndexVar="#{persona}">
 
-										<p:column headerText="Apellido, Nombre" style="width:50px">
+										<p:column selectionMode="multiple" style="width:18px" headerText="Check"/>
+										
+										<p:column headerText="Apellido y Nombre" style="width:50px">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
 										</p:column>
 
@@ -40,22 +42,25 @@
 											<h:outputText value="#{persona.estado}" style="width:50px" />
 										</p:column>
 
-										<p:column selectionMode="multiple" style="width:18px" />
 
 									</p:dataTable>
-									<br></br>
-									<br></br>
-									<div align="center">
-										<p:commandButton value="Agregar seleccionados en nueva Agenda"
+									<div align="center" >
+										<p:commandButton value="Agregar Seleccionados en nueva Agenda"
 											id="btnNuevaAgenda" oncomplete="nuevaAgendaDialog.show()"
-											icon="ui-icon-star" title="Crear Nueva Agenda"
+											icon="ui-icon-disk" title="Crear Nueva Agenda"
 											update=":nuevaAgendaForm" />
-
+										<p:spacer width="100"></p:spacer>
 										<p:commandButton
 											value="Agregar Seleccionados en Agenda existente"
 											id="btnAgregarEnAgenda" oncomplete="agregarEnAgendaDialog.show()"
-											icon="ui-icon-star" title="Crear Nueva Agenda"
-											update=":agregarEnAgendaForm" />
+											icon="ui-icon-disk" title="Crear Nueva Agenda"
+											update=":agregarEnAgendaForm"/>
+									</div>
+									<br/>
+									<div align="right" >
+										<p:commandButton value="Nuevo Envio" action="envioAlerta"
+											icon="ui-icon-home" title="Crear Nueva Agenda" ajax="false" />
+
 									</div>
 								</p:panel>
 							</p:layoutUnit>
@@ -158,7 +163,7 @@
 						<p:blockUI block="displayNuevaAgenda"
 							trigger="tablePersonasNueva:btnAgregarPersonaNueva, btnGuardarNueva">
 								Un momento por favor...<br />
-							<p:graphicImage value="http://imgsms.techresources.com.ar//ajax-loader.gif" />
+							<p:graphicImage value="http://img.mensajeados.com.ar/ajax-loader.gif" />
 						</p:blockUI>
 
 					</h:form>
@@ -261,7 +266,7 @@
 						<p:blockUI block="displayAgregarEnAgenda"
 							trigger="tablePersonasNueva:btnAgregarPersonaNueva, btnGuardarNueva">
 								Un momento por favor...<br />
-							<p:graphicImage value="http://imgsms.techresources.com.ar//ajax-loader.gif" />
+							<p:graphicImage value="http://img.mensajeados.com.ar/ajax-loader.gif" />
 						</p:blockUI>
 
 					</h:form>

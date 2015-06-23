@@ -8,8 +8,7 @@
 
 <h:head>
 	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
-	<title>TechResources - Mensajes </title>
-
+	<title>Mensajeados </title>
 </h:head>
 
 <body>
@@ -21,13 +20,13 @@
 
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
 
-					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%">
+					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%;text-align: center">
 
 						<p:wizard flowListener="#{personaBean.onFlowProcess}">
 
-							<p:tab id="cargaPersonas" title="Contactos" titletip="Crea contactos o agregalo desde tus agendas.">
+							<p:tab id="cargaPersonas"  title="Contactos"  titletip="Crea contactos o agregalo desde tus agendas.">
 
-								<p:layout id="tuhermana"  style="height:250px">
+								<p:layout style="height:350px">
 
 									<p:layoutUnit position="center">
 
@@ -44,7 +43,7 @@
 												<p:ajax event="rowEditCancel"
 													listener="#{personaBean.onCancel}" update=":form:mensaje" />
 
-												<p:column headerText="Apellido, Nombre" style="width:50px">
+												<p:column headerText="Apellido y Nombre" style="width:50px">
 													<p:cellEditor>
 														<f:facet name="output">
 															<h:outputText
@@ -107,11 +106,11 @@
 										<p:blockUI block="pnlDestMsj"
 											trigger=":form:personasList:btnNuevoDest,:form:btnAgregarAgenda">
 													Un momento por favor...<br />
-											<p:graphicImage value="http://imgsms.techresources.com.ar/ajax-loader.gif" />
+											<p:graphicImage value="http://img.mensajeados.com.ar/ajax-loader.gif" />
 										</p:blockUI>
 									</p:layoutUnit>
 									
-									<p:layoutUnit position="east" size="300" header="Contactos" resizable="true" closable="true" collapsible="true" effect="slide"  >
+									<p:layoutUnit position="east" size="300" header="Agendas" resizable="true" closable="true" collapsible="true" effect="slide"  >
 										<div align="center" style="padding-top: 10px;" >
 											<p:selectOneMenu required="false"
 												value="#{personaBean.selectedAgenda}">
@@ -133,12 +132,9 @@
 								<p:panel header="Mensaje de texto">
 
 									<h:panelGrid columns="2">
-										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}"
-											completeMethod="#{envioAlertaView.completeArea}" rows="5"
-											cols="50" counterTemplate="{0} characters remaining."
-											queryDelay="750" minQueryLength="1" />
-										<!--  counter="counter"/> -->
-										<!-- h:outputText id="counter" /-->
+										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}" completeMethod="#{envioAlertaView.completeArea}" rows="5"
+											cols="50" queryDelay="750" minQueryLength="1" counter="counter"  counterTemplate="{0} total de caracteres." />
+										<h:outputText id="counter" />
 										<p:commandButton value="ENVIAR"
 											action="#{envioMensajeAction.enviarMsj}" ajax="false" />
 									</h:panelGrid>
