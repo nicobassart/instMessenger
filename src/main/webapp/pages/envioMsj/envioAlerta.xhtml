@@ -26,7 +26,7 @@
 
 							<p:tab id="cargaPersonas"  title="Contactos"  titletip="Crea contactos o agregalo desde tus agendas.">
 
-								<p:layout style="height:350px">
+								<p:layout style="height:470px">
 
 									<p:layoutUnit position="center">
 
@@ -35,9 +35,12 @@
 
 											<h:messages errorClass="error" />
 
-											<p:dataTable var="persona" value="#{personaBean.personas}"
-												id="personasList" editable="true" rows="7"
-                         						paginator="true">
+											<p:dataTable paginatorAlwaysVisible="false" var="persona" value="#{personaBean.personas}"
+												id="personasList" editable="true" rows="10" widgetVar="widgetVar"
+                         						paginator="true"
+                         						emptyMessage="Debes cargar contactos.">
+<!--                          						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         						rowsPerPageTemplate="5,10,15" -->
 												<p:ajax event="rowEdit" listener="#{personaBean.onEdit}"
 													update=":form:mensaje" />
 												<p:ajax event="rowEditCancel"
@@ -98,7 +101,9 @@
 														id="btnNuevoDest" update=":form:personasList"
 														actionListener="#{personaBean.agregarPersona}"
 														styleClass="ui-priority-primary"
-														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
+ 														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
+<!-- 														oncomplete="widgetVar.getPaginator().setPage(widgetVar.getPaginator().getRowCount()/7);" /> -->
+														<!-- oncomplete="alert(widgetVar.getPaginator().getLastPageLink())" /> -->
 												</f:facet>
 											</p:dataTable>
 
