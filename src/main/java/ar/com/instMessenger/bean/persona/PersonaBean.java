@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import ar.com.instMessenger.servicios.dao.persona.IPersonaDao;
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class PersonaBean extends Bean {
 	private static final long serialVersionUID = -8725702349262618823L;
+
+	private static final int ROWS_DATATABLE = 10;
 
 	@Autowired
 	IPersonaDao personaDAO;
@@ -49,7 +52,27 @@ public class PersonaBean extends Bean {
 		Persona persona = new Persona();
 		persona.setEstado("ACTIVO");
 		personas.add(persona);
-		//personaDAO.add(persona);
+		
+		final DataTable d = (DataTable) FacesContext.getCurrentInstance().getViewRoot().findComponent("form:personasList");
+			
+		
+		   int first = 1;
+		    if (d.getRowCount() % ROWS_DATATABLE == 0) {
+		        first = (d.getRowCount() - ROWS_DATATABLE);
+		    }
+		    else 
+		    {
+		        first = (d.getRowCount()/ROWS_DATATABLE)*ROWS_DATATABLE;
+		    }
+		    d.setFirst(first);
+		
+		
+			int page = d.getPageCount();
+			int link = d.getPageLinks();
+			int rows = d.getRows();
+
+//			d.setPFirst(d.getPageCount());
+//		//personaDAO.add(persona);
 	}
 
 	public String eliminarPersona(Persona persona) {
@@ -63,8 +86,8 @@ public class PersonaBean extends Bean {
 		Persona persona = (Persona) event.getObject();
 		//personaDAO.update(persona);
 		
-		personas.remove(persona);
-		personas.add(persona);
+		//personas.remove(persona);
+		//personas.add(persona);
 
 		FacesMessage msg = new FacesMessage("Parametro Editado",
 				persona.getApellido() + ", " + persona.getNombre());
