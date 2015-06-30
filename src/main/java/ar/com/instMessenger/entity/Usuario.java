@@ -14,10 +14,10 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private int id;
-	private String nombre;
-	private String apellido;
+	private String password;
 	private String userName;
 	private String mail;
+	
 	
 	public int getId() {
 		return id;
@@ -35,20 +35,12 @@ public class Usuario implements Serializable {
 		this.userName = userName;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getPassword() {
+		return password;
 	}
-	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public String getApellido() {
-		return apellido;
-	}
-	
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getMail() {
@@ -58,8 +50,4 @@ public class Usuario implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
-	
-	
-	
 }

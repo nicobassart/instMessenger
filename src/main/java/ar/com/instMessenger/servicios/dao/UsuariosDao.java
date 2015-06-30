@@ -60,8 +60,7 @@ public class UsuariosDao implements IUsuariosDao{
 		}
 		catch (NoResultException e) {
 			usuario = new Usuario();
-			usuario.setApellido(apellido);
-			usuario.setNombre(nombre);
+			usuario.setPassword("");
 			usuario.setMail(mail);
 			usuario.setUserName(userName);
 			em.persist(usuario);

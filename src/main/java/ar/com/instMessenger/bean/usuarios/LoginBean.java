@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import ar.com.instMessenger.entity.Persona;
 
 @Named
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
+@Scope(value = WebApplicationContext.SCOPE_REQUEST)
 
 public class LoginBean implements Serializable {
 
@@ -38,8 +38,7 @@ public class LoginBean implements Serializable {
 	// ActionEvent actionEvent
 	public String login() throws java.io.IOException {
 		try {
-			Authentication req = new UsernamePasswordAuthenticationToken(
-					this.getUserName(), getPassword());
+			Authentication req = new UsernamePasswordAuthenticationToken(this.getUserName(), getPassword());
 			Authentication result = am.authenticate(req);
 			SecurityContextHolder.getContext().setAuthentication(result);
 			// person = (Persona)
