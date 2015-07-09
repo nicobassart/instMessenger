@@ -26,7 +26,7 @@
 	<navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{loginBean.login}</from-action>
+			<!-- <from-action>#{loginBean.login}</from-action> -->
 			<from-outcome>loginOK</from-outcome>
 			<to-view-id>/pages/envioMsj/envioAlerta.xhtml</to-view-id>
 			<redirect />

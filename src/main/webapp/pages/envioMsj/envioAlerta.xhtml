@@ -137,11 +137,10 @@
 								<p:panel header="Mensaje de texto">
 
 									<h:panelGrid columns="2">
-										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}" completeMethod="#{envioAlertaView.completeArea}" rows="5"
-											cols="50" queryDelay="750" minQueryLength="1" counter="counter"  counterTemplate="{0} total de caracteres." />
-										<h:outputText id="counter" />
-										<p:commandButton value="ENVIAR"
-											action="#{envioMensajeAction.enviarMsj}" ajax="false" />
+ 										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}" completeMethod="#{envioAlertaView.completeArea}" rows="5"
+											cols="50" queryDelay="750" minQueryLength="1"/>
+										<h:outputText value="Personaliza tú mensaje, Sr/Sra. @NOMBRE , @APELLIDO nos ponemos en contacto..."   />
+										<p:commandButton value="ENVIAR"	action="#{envioMensajeAction.enviarMsj}" ajax="false" />
 									</h:panelGrid>
 
 

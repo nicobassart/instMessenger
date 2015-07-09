@@ -27,12 +27,14 @@
 		}
 	</style>
 	<h:form>
+	
 	<div class="left">
 		<a href="http://www.techresources.com.ar" target="blank"><img
 			src="http://img.mensajeados.com.ar/logo_mensajeados.png" /></a>
 	</div>
-	<div class="center">MENSAJEADOS</div>
+	<div class="center">MENSAJEADOS    </div>
 	
+	<small><h:outputText value="Usuario: #{usuarioBean.userName}" image="ui-icon-carat-1-e" /></small>
 	<div class="right">
  		<p:commandLink action="#{loginBean.logout}" oncomplete="salirDialog.show()">
 			<h:graphicImage value="http://img.mensajeados.com.ar/salir.png"  />

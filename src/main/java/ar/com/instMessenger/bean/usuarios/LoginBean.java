@@ -7,26 +7,32 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.context.WebApplicationContext;
-
-import ar.com.instMessenger.entity.Persona;
 
 @Named
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 
 public class LoginBean implements Serializable {
 
-	private static final long serialVersionUID = 2868742783741899100L;
-	private Persona person = new Persona();
-	private Boolean isAdmin = false;
-	private String userName = "Usuario";
+	final Logger logger = LoggerFactory.getLogger(LoginBean.class);
 
-	private String password = "Usuario";
+	private static final long serialVersionUID = 2868742783741899100L;
+	private Boolean isAdmin = false;
+	private String userName;
+	private String password;
+	
+	@Autowired
+	private UsuarioBean usuario;
+	
 
 	@Resource(name = "authenticationManager")
 	private AuthenticationManager am;
@@ -43,8 +49,14 @@ public class LoginBean implements Serializable {
 			SecurityContextHolder.getContext().setAuthentication(result);
 			// person = (Persona)
 			// SecurityContextHolder.getContext().getAuthentication().getDetails();
-			System.out.println("Login Success! ..");
-
+			User user = (User) result.getPrincipal();
+			
+			
+			SecurityContextHolder.getContext().getAuthentication().getDetails();
+			logger.info("Login Success! ..");
+			
+			usuario.setUserName(user.getUsername());
+			usuario.setPassword(password);
 			// HttpRequest request = (HttpRequest)
 			// FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
@@ -71,7 +83,7 @@ public class LoginBean implements Serializable {
 		SecurityContextHolder.getContext().setAuthentication(null);
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.clear();
-		return "/login";
+		return "/logout";
 	}
 
 	public String getLogoutHidden() {
@@ -99,14 +111,6 @@ public class LoginBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Persona getPerson() {
-		return person;
-	}
-
-	public void setPerson(Persona person) {
-		this.person = person;
 	}
 
 	public Boolean getIsAdmin() {

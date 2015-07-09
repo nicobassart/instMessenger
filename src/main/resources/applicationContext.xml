@@ -49,7 +49,7 @@
 		<property name="persistenceUnitName" value="dataBasePpal"></property>
 	</bean>
 	
-	<bean id="loginBean" class="ar.com.instMessenger.bean.usuarios.LoginBean"/>
+	<!-- <bean id="loginBean" class="ar.com.instMessenger.bean.usuarios.LoginBean"/> -->
 	
 	<bean id="accountDetailsService" class="ar.com.instMessenger.security.UserDetailsService" />
 	

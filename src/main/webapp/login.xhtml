@@ -40,8 +40,13 @@
 
       <h:form id="formLogin" class="form-signin" role="form">
         <h2 class="form-signin-heading">INGRESO</h2>
-        <h:inputText name="username" id="j_username" value="#{loginBean.userName}" type="text" class="form-control" placeholder="Usuario" required="true" autofocus="true" />
-        <h:inputSecret name="password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
+        
+        <p:message for="j_username" />
+        <h:inputText name="username" id="j_username" size="30" requiredMessage="Por favor Ingresar el usuario." value="#{loginBean.userName}" type="text" class="form-control" placeholder="Usuario" required="true" autofocus="true" />
+        <p:watermark for="j_username" value="Usuario *" />
+        <br/>
+        <h:inputSecret name="password" id="j_password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
+        <p:watermark for="j_password" value="Clave *" />
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Recordar</input>
         </label>
