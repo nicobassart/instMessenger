@@ -1,10 +1,12 @@
 package ar.com.instMessenger.bean.persona;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
@@ -127,6 +129,17 @@ public class PersonaBean extends Bean {
 		Agenda agenda = agendaDAO.find(selectedAgenda);
 		if(agenda!=null)
 			personas.addAll(agenda.getPersonas());
+	}
+	
+	public void abmAgendas(ActionEvent event) {
+		try {
+			 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			 ec.redirect(ec.getRequestContextPath() + "/pages/agenda/abmcAgenda.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public boolean isSkip() {
