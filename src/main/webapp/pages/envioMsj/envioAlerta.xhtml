@@ -12,21 +12,46 @@
 </h:head>
 
 <body>
+
+
 	<f:view>
 		<ui:composition template="/pages/template.xhtml">
 
 			<ui:define name="body">
+				<script language="JavaScript">
+					function hideBackOnLastTab() {
+					    if($("ul.ui-wizard-step-titles>li").last()
+					             .is("ul.ui-wizard-step-titles>li.ui-state-highlight")) {
+					            $("div.ui-wizard-navbar>button.ui-wizard-nav-back").css("display", "none");
+					    }
+					
+					}
+				</script>
+
 				<h:form id="form">
 
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
 
 					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%;text-align: center">
-
-						<p:wizard flowListener="#{personaBean.onFlowProcess}">
-
-							<p:tab id="cargaPersonas"  title="Contactos"  titletip="Crea contactos o agregalo desde tus agendas.">
-
-								<p:layout style="height:470px">
+					
+					<div class="ui-grid ui-grid-responsive">
+					    <div class="ui-grid-row">
+					        <div class="ui-grid-col-6" align="center"><p:commandButton value="Volver" icon="ui-icon-arrow-1-w"  iconPos="right" type="button" onclick="PF('myWizard').back();" /></div>
+					        <div class="ui-grid-col-6" align="center"><p:commandButton value="Siguiente" icon="ui-icon-arrow-1-e" iconPos="left" type="button" onclick="PF('myWizard').next();" /></div>
+					    </div>
+					</div>
+					
+					
+						<p:wizard flowListener="#{personaBean.onFlowProcess}"  widgetVar="myWizard" showNavBar="false" effect="fade" showStepStatus="true" onnext="hideBackOnLastTab();" >
+							
+							<p:tab id="cargaPersonas"  style="height:475px"  >
+							
+					        	<f:facet name="title">
+					               <!-- <h:outputText value="Contactos"/> -->
+					               <p:graphicImage value="http://img.mensajeados.com.ar/contactos.png"/>
+					            </f:facet>
+					            
+								<p:layout style="height:100%">
 
 									<p:layoutUnit position="center">
 
@@ -132,7 +157,6 @@
 											<p:commandButton value="Agregar Agenda" id="btnAgregarAgenda"
 												actionListener="#{personaBean.agregarPersonas}"
 												update=":form:personasList"  />
-											
 										</div>
 										<br></br>
 										<br></br>
@@ -144,6 +168,10 @@
 							</p:tab>
 
 							<p:tab id="cargarMensaje" title="Mensaje">
+								<f:facet name="title">
+					               <!-- <h:outputText value="Mensaje"/> -->
+					               <p:graphicImage value="http://img.mensajeados.com.ar/mensaje.png"/>
+					            </f:facet>
 								<p:panel header="Mensaje de texto">
 
 									<h:panelGrid columns="2">
@@ -166,6 +194,6 @@
 
 	</f:view>
 
-</body>
 
+</body>
 </html>
