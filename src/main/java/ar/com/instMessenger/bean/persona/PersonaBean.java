@@ -81,6 +81,12 @@ public class PersonaBean extends Bean {
 		return null;
 	}
 	
+	public String eliminarPersonas() {
+		personas.clear();
+		return null;
+	}
+	
+	
 	public void onEdit(RowEditEvent event) {
 
 		Persona persona = (Persona) event.getObject();

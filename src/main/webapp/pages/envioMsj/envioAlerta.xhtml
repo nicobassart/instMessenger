@@ -104,6 +104,11 @@
  														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
 <!-- 														oncomplete="widgetVar.getPaginator().setPage(widgetVar.getPaginator().getRowCount()/7);" /> -->
 														<!-- oncomplete="alert(widgetVar.getPaginator().getLastPageLink())" /> -->
+														<p:commandButton value="Borrar Tabla"
+															id="btnBorrarPersonas" update=":form:personasList"
+															actionListener="#{personaBean.eliminarPersonas}"
+															styleClass="ui-priority-primary"
+	 														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
 												</f:facet>
 											</p:dataTable>
 
