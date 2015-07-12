@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+ "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -12,13 +12,20 @@
 </h:head>
 
 <body>
-
-
+	
 	<f:view>
 		<ui:composition template="/pages/template.xhtml">
 
 			<ui:define name="body">
 				<script language="JavaScript">
+				
+					function cont(){
+						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length);
+						if( $("#form\\:msj").val().length > 160){
+							$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length + "   " + Math.ceil($("#form\\:msj").val().length/160) + " SMS" );
+						}
+					}
+				
 					function hideBackOnLastTab() {
 					    if($("ul.ui-wizard-step-titles>li").last()
 					             .is("ul.ui-wizard-step-titles>li.ui-state-highlight")) {
@@ -32,7 +39,7 @@
 
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
 
-					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%;text-align: center">
+					<p:panel header="En dos simples pasos podrÃ¡s enviar los mensajes que quieras" style="height:100%;text-align: center">
 					
 					<div class="ui-grid ui-grid-responsive">
 					    <div class="ui-grid-row">
@@ -176,11 +183,13 @@
 
 									<h:panelGrid columns="2">
  										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}" completeMethod="#{envioAlertaView.completeArea}" rows="5"
-											cols="50" queryDelay="750" minQueryLength="1"/>
-										<h:outputText value="Personaliza tú mensaje, Sr/Sra. @NOMBRE , @APELLIDO nos ponemos en contacto..."   />
-										<p:commandButton value="ENVIAR"	action="#{envioMensajeAction.enviarMsj}" ajax="false" />
+											cols="50" queryDelay="750" minQueryLength="1" onkeyup="cont()"/>
+										<h:outputText value="Personaliza tÃº mensaje, Sr/Sra. @NOMBRE , @APELLIDO nos ponemos en contacto..."   />
 									</h:panelGrid>
-
+									<h:panelGrid columns="2">
+										<p:commandButton value="ENVIAR"	action="#{envioMensajeAction.enviarMsj}" ajax="false" />
+										<h:outputText value="Cantidad de Letras del mensaje: "  id="caracteres" />
+									</h:panelGrid>
 
 								</p:panel>
 							</p:tab>
@@ -193,7 +202,5 @@
 		</ui:composition>
 
 	</f:view>
-
-
 </body>
 </html>
