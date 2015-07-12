@@ -81,12 +81,16 @@ public class LoginBean implements Serializable {
 		}
 	}
 
-	public String logout() {
-		// System.out.println("LoginBean.logout()....");
-		SecurityContextHolder.getContext().setAuthentication(null);
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.clear();
-		return "/logout";
+	public void logout() {
+		try {
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			SecurityContextHolder.getContext().setAuthentication(null);
+			 ec.getSessionMap().clear();
+			 ec.redirect(ec.getRequestContextPath() + "/logout.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void homePage(ActionEvent event) {
