@@ -195,7 +195,7 @@
 									listener="#{agendaBean.onCancelPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
 
-								<p:column headerText="Apellido, Nombre" style="width:50px">
+								<p:column headerText="Apellido, Nombre" width="30">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
@@ -208,7 +208,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" style="width:25%">
+								<p:column headerText="Celular" width="15">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.celular}" />
@@ -218,7 +218,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" style="width:50px">
+								<p:column headerText="Estado" width="10">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.estado}" style="width:50px" />
@@ -232,7 +232,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" style="width:2%">
+								<p:column headerText="Opciones" width="10">
 									<p:rowEditor />
 									<h:commandLink
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
