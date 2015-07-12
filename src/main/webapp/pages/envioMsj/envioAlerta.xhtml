@@ -23,13 +23,22 @@
 						var pattern = new RegExp("á|é|í|ó|ú|Á|É|Í|Ó|Ú");//caracteres que hacen que un SMS se acote a 70 caracteres
 					    return pattern.test(str);
 					}
+					function tieneArrobas(str) {
+						var pattern = new RegExp("@NOMBRE|@APELLIDO");//caracteres que hacen que un SMS se acote a 70 caracteres
+					    return pattern.test(str);
+					}
 				
 					function cont(){
 						var caracteresPorSms = 160;
+						var caracteresReemplazados = $("#form\\:msj").val().replace("@NOMBRE","111111111111111").replace("@APELLIDO","111111111111111") ;
 						if( tieneAcentos($("#form\\:msj").val())  ){
 							caracteresPorSms = 70;
 						}	
-						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length + "&nbsp;&nbsp;&nbsp;&nbsp; " + Math.ceil($("#form\\:msj").val().length/caracteresPorSms) + " SMS" );
+						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " 
+								  + caracteresReemplazados.length + "&nbsp;&nbsp;&nbsp;&nbsp; " + Math.ceil(caracteresReemplazados.length/caracteresPorSms) + " SMS por Destinatario" );
+						if(tieneArrobas($("#form\\:msj").val())){
+							$('#form\\:aclaracion').text("Importante, se estima para el cálculo: @NOMBRE=15 caracteres. @APELLIDO=15 caracteres");
+						}
 					}
 				
 					function hideBackOnLastTab() {
@@ -91,9 +100,9 @@
 																value="#{persona.apellido}, #{persona.nombre}" />
 														</f:facet>
 														<f:facet name="input">
-															<h:inputText value="#{persona.apellido}" id="apellido" />
+															<h:inputText value="#{persona.apellido}" id="apellido" maxlength="15"/>
 															<p:watermark for="apellido" value="Apellido" />
-															<h:inputText value="#{persona.nombre}" id="nombre" />
+															<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15"/>
 															<p:watermark for="nombre" value="Nombre" />
 														</f:facet>
 													</p:cellEditor>
@@ -192,9 +201,11 @@
 											cols="50" queryDelay="750" minQueryLength="1" onkeyup="cont()"/>
 										<h:outputText value="Personaliza tú mensaje, Sr/Sra. @NOMBRE , @APELLIDO nos ponemos en contacto..."   />
 									</h:panelGrid>
-									<h:panelGrid columns="2">
+									<h:panelGrid columns="1">
 										<p:commandButton value="ENVIAR"	action="#{envioMensajeAction.enviarMsj}" ajax="false" />
+										<br></br>
 										<h:outputText value="Cantidad de Letras del mensaje: "  id="caracteres" />
+										<h:outputText value=""  id="aclaracion" style="color:red"/>
 									</h:panelGrid>
 
 								</p:panel>
