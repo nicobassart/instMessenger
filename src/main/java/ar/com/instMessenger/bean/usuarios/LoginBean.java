@@ -1,10 +1,13 @@
 package ar.com.instMessenger.bean.usuarios;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -84,6 +87,16 @@ public class LoginBean implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.clear();
 		return "/logout";
+	}
+	
+	public void homePage(ActionEvent event) {
+		try {
+			 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			 ec.redirect(ec.getRequestContextPath() + "/pages/envioMsj/envioAlerta.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getLogoutHidden() {
