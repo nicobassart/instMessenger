@@ -32,7 +32,7 @@
 							</f:facet>
 							<p:commandLink value="#{agenda.nombre}"
 								update=":agendaDetailForm:displayDetailAgenda"
-								oncomplete="agendaDialog.show()" title="View">
+								oncomplete="PF('agendaDialog').show()" title="View">
 								<f:setPropertyActionListener value="#{agenda}"
 									target="#{agendaBean.selectedAgenda}" />
 							</p:commandLink>
@@ -49,7 +49,7 @@
 					<br></br>
 					<div align="center">
 						<p:commandButton value="Nueva Agenda" id="btnNuevaAgenda"
-							oncomplete="nuevaAgendaDialog.show()" icon="ui-icon-star"
+							oncomplete="PF('nuevaAgendaDialog').show();" icon="ui-icon-star"
 							title="Crear Nueva Agenda"
 							update=":nuevaAgendaForm:displayNuevaAgenda" />
 						<p:commandButton value="Eliminar Agendas" align="center"
@@ -67,8 +67,8 @@
 				</h:form>
 
 
-				<p:dialog header="Agenda Detail" widgetVar="agendaDialog"
-					resizable="false" id="detailAgendaDlg">
+				<p:dialog header="Agenda Detail" widgetVar="agendaDialog"  width="900px"
+					resizable="false" id="agendaDialog">
 					<h:form id="agendaDetailForm">
 						<p:growl id="growDetail" showDetail="true" life="5000" />
 						<p:panelGrid id="displayDetailAgenda" columns="2" cellpadding="4"
@@ -93,7 +93,7 @@
 									listener="#{agendaBean.onCancelPersona}"
 									update=":agendaDetailForm:growDetail" />
 
-								<p:column headerText="Apellido, Nombre" style="width:50px">
+								<p:column headerText="Apellido, Nombre" width="30">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
@@ -106,23 +106,23 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" style="width:25%">
+								<p:column headerText="Celular" width="15">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.celular}" />
 										</f:facet>
 										<f:facet name="input">
-											<h:inputText value="#{persona.celular}" style="width:100%" />
+											<h:inputText value="#{persona.celular}"  />
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" style="width:50px">
+								<p:column headerText="Estado" width="10">
 									<p:cellEditor>
 										<f:facet name="output">
-											<h:outputText value="#{persona.estado}" style="width:50px" />
+											<h:outputText value="#{persona.estado}"/>
 										</f:facet>
-										<f:facet name="input" style="width:50px">
-											<p:selectOneMenu value="#{persona.estado}" style="width:100%">
+										<f:facet name="input" >
+											<p:selectOneMenu value="#{persona.estado}" style="width:130px;">
 												<f:selectItem itemLabel="Select One" itemValue="" />
 												<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
 												<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
@@ -130,14 +130,15 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" style="width:2%">
+								<p:column headerText="Opciones" width="10" >
 									<p:rowEditor />
-									<h:commandLink
+									<h:commandLink 
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
 										update=":agendaDetailForm:tablePersonasDetail">
 										<f:ajax render=":agendaDetailForm:tablePersonasDetail" />
 										<span class="ui-icon ui-icon-trash"></span>
 									</h:commandLink>
+						
 								</p:column>
 								<f:facet name="footer">
 									<p:commandButton value="Agregar Persona"
@@ -152,7 +153,7 @@
 								<p:commandButton value="Guardar" id="btnUpdate"
 									update=":agendaDetailForm, :nuevaAgendaForm,:form:dataTable,:growl"
 									actionListener="#{agendaBean.updateAgenda}"
-									oncomplete="if (!args.validationFailed) agendaDialog.hide()" />
+									oncomplete="if (!args.validationFailed) PF('agendaDialog').hide()" />
 							</f:facet>
 						</p:panelGrid>
 						<p:blockUI block="displayDetailAgenda"
@@ -164,8 +165,8 @@
 				</p:dialog>
 
 
-				<p:dialog header="Crear Nueva Agenda" widgetVar="nuevaAgendaDialog"
-					resizable="false" id="newagendaDlg">
+				<p:dialog header="Crear Nueva Agenda" widgetVar="nuevaAgendaDialog" width="900px"
+					resizable="false" id="nuevaAgendaDialog">
 					<p:ajax event="close" listener="#{agendaBean.onCancel}"
 						update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
 					<h:form id="nuevaAgendaForm">
@@ -174,7 +175,7 @@
 							style="margin:0 auto;">
 
 
-							<p:inputText value="#{agendaBean.nuevaAgenda.nombre}"
+							<p:inputText value="#{agendaBean.nuevaAgenda.nombre}" 
 								id="nombreAgenda" maxlength="18" required="true"
 								requiredMessage="Por favor, ingrese un nombre!" />
 							<p:watermark for="nombreAgenda" value="Nombre de la Agenda" />
@@ -253,7 +254,7 @@
 								<p:commandButton value="Guardar" id="btnGuardarNueva"
 									update=":agendaDetailForm, :nuevaAgendaForm,:form:dataTable,:growl"
 									actionListener="#{agendaBean.agregarAgenda}"
-									oncomplete="if (!args.validationFailed) nuevaAgendaDialog.hide()" />
+									oncomplete="if (!args.validationFailed) PF('nuevaAgendaDialog').hide()" />
 							</f:facet>
 
 						</p:panelGrid>
