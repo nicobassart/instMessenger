@@ -11,6 +11,7 @@
 			display: inline;
 			float: right;
 			padding: 4px;
+			overflow:hidden;
 		}
 		
 		.center {
@@ -19,11 +20,13 @@
 			font-family: 'Orbitron';
 			font-size: 30px;
 			text-shadow: 1px 1px 1px #aaa;
+			overflow:hidden;
 		}
 		
 		.left {
-			padding: 2px;
+			padding: 4px;
 			display: inline;
+			overflow:hidden;
 		}
 	</style>
 	<h:form>
@@ -32,10 +35,14 @@
 		<a href="http://www.techresources.com.ar" target="blank"><img
 			src="http://img.mensajeados.com.ar/logo_mensajeados.png" /></a>
 	</div>
-	<div class="center">MENSAJEADOS    </div>
+	<div  class="center">MENSAJEADOS    </div>
 	
 	<small><h:outputText value="Usuario: #{usuarioBean.userName}" image="ui-icon-carat-1-e" /></small>
 	<div class="right">
+		<p:commandLink actionListener="#{loginBean.homePage}" >
+			<h:graphicImage value="http://img.mensajeados.com.ar/inicio.png"  height="40"/>
+		</p:commandLink>
+		<label></label>
  		<p:commandLink action="#{loginBean.logout}" oncomplete="salirDialog.show()">
 			<h:graphicImage value="http://img.mensajeados.com.ar/salir.png"  />
 		</p:commandLink>
