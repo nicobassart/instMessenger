@@ -19,11 +19,17 @@
 			<ui:define name="body">
 				<script language="JavaScript">
 				
+					function tieneAcentos(str) {
+						var pattern = new RegExp("á|é|í|ó|ú|Á|É|Í|Ó|Ú");//caracteres que hacen que un SMS se acote a 70 caracteres
+					    return pattern.test(str);
+					}
+				
 					function cont(){
-						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length);
-						if( $("#form\\:msj").val().length > 160){
-							$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length + "   " + Math.ceil($("#form\\:msj").val().length/160) + " SMS" );
-						}
+						var caracteresPorSms = 160;
+						if( tieneAcentos($("#form\\:msj").val())  ){
+							caracteresPorSms = 70;
+						}	
+						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " + $("#form\\:msj").val().length + "&nbsp;&nbsp;&nbsp;&nbsp; " + Math.ceil($("#form\\:msj").val().length/caracteresPorSms) + " SMS" );
 					}
 				
 					function hideBackOnLastTab() {
