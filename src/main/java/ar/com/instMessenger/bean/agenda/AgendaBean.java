@@ -50,6 +50,8 @@ public class AgendaBean extends Bean {
 	private Agenda selectedAgenda;
 
 	private Agenda nuevaAgenda = new Agenda();
+	
+	private List<Persona> personas;
 
 	private boolean skip;
 
@@ -57,9 +59,10 @@ public class AgendaBean extends Bean {
 	public void postConstructor() {
 		agendas = agendaDAO.getAgendas();
 		nuevaAgenda.setPersonas(new ArrayList<Persona>());
+		personas = this.getAgendaDefoult();
 	}
 	
-	public List<Persona> getAgendaDefoult(){
+	private List<Persona> getAgendaDefoult(){
 		
 		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
 		
@@ -244,6 +247,14 @@ public class AgendaBean extends Bean {
 
 	public void setSelectedAgenda(Agenda selectedAgenda) {
 		this.selectedAgenda = selectedAgenda;
+	}
+
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
 	}
 
 }
