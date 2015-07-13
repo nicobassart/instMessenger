@@ -7,6 +7,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -18,6 +20,7 @@ import ar.com.instMessenger.entity.Usuario;
 
 @Service
 public class UsuariosDao implements IUsuariosDao{
+	final Logger logger = LoggerFactory.getLogger(UsuariosDao.class);
 	
 	@PersistenceContext
 	EntityManager em;
@@ -43,7 +46,7 @@ public class UsuariosDao implements IUsuariosDao{
 			usuario = (Usuario) query.getSingleResult();
 		}
 		catch (NoResultException e) {
-			System.out.println("No hay resultados para " + userName);
+			logger.info("No hay resultados para " + userName);
 		}
 		
 		return usuario;

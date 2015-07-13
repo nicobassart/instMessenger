@@ -68,8 +68,8 @@ public class LoginBean implements Serializable {
 
 			return "loginOK";
 		} catch (IllegalArgumentException ie) {
-			System.out.println("Login Failed on IllegalArgumentException");
-			System.out.println(ie.getMessage());
+			logger.info("Login Failed on IllegalArgumentException");
+			logger.info(ie.getMessage());
 			FacesContext.getCurrentInstance()
 					.addMessage(
 							"formLogin",
