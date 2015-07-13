@@ -59,5 +59,13 @@ public class AgendaDao implements IAgendaDao,Serializable{
 			em.remove(em.contains(agenda) ? agenda : em.merge(agenda));	
 		}
 	}
+
+	@Override
+	public List<Agenda> getAgendas(int idUsuario) {
+		Query newQuery =em.createQuery("from Agenda as agenda where id_usuario = ?");
+		newQuery.setParameter(1, idUsuario);
+		List<Agenda> resultList = newQuery.getResultList();
+		return resultList;	
+	}
 	
 }

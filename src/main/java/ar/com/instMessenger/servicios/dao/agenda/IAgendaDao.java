@@ -6,6 +6,7 @@ import ar.com.instMessenger.entity.Agenda;
 
 public interface IAgendaDao {
 	public List<Agenda> getAgendas();
+	public List<Agenda> getAgendas(int idUsuario);
 	public void update(Agenda agenda);
 	public void add(Agenda agenda);
 	public void remove(Agenda agenda);
