@@ -36,6 +36,7 @@ public class PersonaBean extends Bean {
 
 	@Autowired
 	IUsuariosDao usuariosDao;
+	
 	@Autowired
 	UsuarioBean usuarioBean;
 	
