@@ -23,6 +23,7 @@ public class Agenda implements Serializable {
 	private int id_agenda;
 	private String nombre;
 	private String descripcion;
+	private int id_usuario;
 	
 	
 	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
@@ -76,6 +77,17 @@ public class Agenda implements Serializable {
         public int hashCode() {
             return super.hashCode();
         }
-	
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+    
+
+        
+        
 	
 }

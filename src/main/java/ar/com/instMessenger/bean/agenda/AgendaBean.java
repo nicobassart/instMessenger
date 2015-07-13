@@ -19,8 +19,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.instMessenger.bean.Bean;
 import ar.com.instMessenger.bean.persona.PersonaBean;
+import ar.com.instMessenger.bean.usuarios.UsuarioBean;
 import ar.com.instMessenger.entity.Agenda;
 import ar.com.instMessenger.entity.Persona;
+import ar.com.instMessenger.entity.Usuario;
+import ar.com.instMessenger.servicios.dao.IUsuariosDao;
 import ar.com.instMessenger.servicios.dao.agenda.IAgendaDao;
 
 @Named
@@ -31,6 +34,12 @@ public class AgendaBean extends Bean {
 	@Autowired
 	IAgendaDao agendaDAO;
 	
+	 @Autowired
+	 IUsuariosDao usuariosDao;
+	
+	 @Autowired
+	 UsuarioBean usuarioBean; 
+	 
 	@Autowired
 	PersonaBean personaBean;
 	
@@ -39,6 +48,8 @@ public class AgendaBean extends Bean {
 	private Agenda[] selectedAgendas;
 
 	private Agenda selectedAgenda;
+	
+	private String selectedAgendaNombre;
 
 	private Agenda nuevaAgenda = new Agenda();
 	
@@ -48,13 +59,18 @@ public class AgendaBean extends Bean {
 
 	@PostConstruct
 	public void postConstructor() {
-		agendas = agendaDAO.getAgendas();
+		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
+		  
+		agendas = agendaDAO.getAgendas(usuario.getId());
+		
 		nuevaAgenda.setPersonas(new ArrayList<Persona>());
 
 	}
 	
 
 	public void agregarAgenda(ActionEvent event) {
+		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
+		
 		FacesMessage msg;
 		if (agendas.contains(nuevaAgenda)) {
 			msg = new FacesMessage("Nombre ya existente: ",nuevaAgenda.getNombre());
@@ -62,26 +78,32 @@ public class AgendaBean extends Bean {
 			return;
 		}
 		
+		nuevaAgenda.setId_usuario(usuario.getId());
+		if(personaBean.getSelectedPersonas()!=null){//Entonces es porque viene del alta de Agendas
+			nuevaAgenda.setPersonas(Arrays.asList(personaBean.getSelectedPersonas()));
+		}
 		agendaDAO.add(nuevaAgenda);
 		agendas = agendaDAO.getAgendas();
 		nuevaAgenda = new Agenda();
 		nuevaAgenda.setPersonas(new ArrayList<Persona>());
 		selectedAgenda = null;
+		personaBean.setSelectedPersonas(null);
 	}
+
 	
 	public void agregarSeleccionadosEnAgenda(ActionEvent event) {
-		FacesMessage msg;
-		if (agendas.contains(nuevaAgenda)) {
-			msg = new FacesMessage("Nombre ya existente: ",nuevaAgenda.getNombre());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			return;
-		}
-		nuevaAgenda.setPersonas(personaBean.getPersonas());
-		agendaDAO.add(nuevaAgenda);
+		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
+		
+		selectedAgenda = agendaDAO.find(selectedAgendaNombre);
+		
+		selectedAgenda.setId_usuario(usuario.getId());
+		selectedAgenda.getPersonas().addAll(Arrays.asList(personaBean.getSelectedPersonas()));
+		agendaDAO.add(selectedAgenda);//hace el merge
 		agendas = agendaDAO.getAgendas();
-		nuevaAgenda = new Agenda();
-		nuevaAgenda.setPersonas(new ArrayList<Persona>());
+		selectedAgenda = new Agenda();
+		selectedAgenda.setPersonas(new ArrayList<Persona>());
 		selectedAgenda = null;
+		personaBean.setSelectedPersonas(null);
 	}
 
 	public void updateAgenda(ActionEvent event) {
@@ -234,4 +256,14 @@ public class AgendaBean extends Bean {
 		this.personas = personas;
 	}
 
+
+	public String getSelectedAgendaNombre() {
+		return selectedAgendaNombre;
+	}
+
+
+	public void setSelectedAgendaNombre(String selectedAgendaNombre) {
+		this.selectedAgendaNombre = selectedAgendaNombre;
+	}
+	
 }
