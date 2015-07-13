@@ -50,7 +50,7 @@ public class PersonaBean extends Bean {
 
 	private String selectedAgenda;
 	
-	private Persona[] selectedPersonas;
+	private Persona[] selectedPersonas = null;
 	
 	private boolean skip;
 
