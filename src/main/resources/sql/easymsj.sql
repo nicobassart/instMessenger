@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2015 a las 15:50:59
+-- Tiempo de generación: 13-07-2015 a las 04:22:11
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -28,17 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `agenda` (
   `id_agenda` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(150) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
 --
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`id_agenda`, `nombre`, `descripcion`) VALUES
-(2, 'Agenda de Morosos', 'Deudas de patente'),
-(6, 'a', 'a');
+INSERT INTO `agenda` (`id_agenda`, `id_usuario`, `nombre`, `descripcion`) VALUES
+(1, 1, 'MiAgenda', 'Mi Agenda');
 
 -- --------------------------------------------------------
 
@@ -49,20 +49,16 @@ INSERT INTO `agenda` (`id_agenda`, `nombre`, `descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `aux_agenda_persona` (
   `id_agenda` int(11) NOT NULL,
   `id_persona` int(11) NOT NULL,
-  `campo1` varchar(45) DEFAULT NULL,
-  `campo2` varchar(45) DEFAULT NULL,
-  `campo3` varchar(45) DEFAULT NULL,
-  `campo4` varchar(45) DEFAULT NULL,
   `id_aux_agenda_persona` int(11) NOT NULL,
   `mensaje_id_mensaje` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
 --
 -- Volcado de datos para la tabla `aux_agenda_persona`
 --
 
-INSERT INTO `aux_agenda_persona` (`id_agenda`, `id_persona`, `campo1`, `campo2`, `campo3`, `campo4`, `id_aux_agenda_persona`, `mensaje_id_mensaje`) VALUES
-(2, 33, NULL, NULL, NULL, NULL, 3, NULL);
+INSERT INTO `aux_agenda_persona` (`id_agenda`, `id_persona`, `id_aux_agenda_persona`, `mensaje_id_mensaje`) VALUES
+(1, 1, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -93,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
 --
 
 INSERT INTO `perfil` (`nombre`, `id_perfil`) VALUES
-('Carga', 1);
+('cliente', 1);
 
 -- --------------------------------------------------------
 
@@ -111,14 +107,14 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `numeroDocumento` varchar(20) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
   `usuario_id_usuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
 INSERT INTO `persona` (`id_persona`, `nombre`, `apellido`, `mail`, `celular`, `tipoDocumento`, `numeroDocumento`, `estado`, `usuario_id_usuario`) VALUES
-(33, 'Ariel', 'Brizi', NULL, '111', NULL, NULL, 'ACTIVO', NULL);
+(1, 'hkjhjk', 'hkhjk', NULL, '4546465', '1', '7987897', 'ACTIVIDO', 1);
 
 -- --------------------------------------------------------
 
@@ -127,19 +123,20 @@ INSERT INTO `persona` (`id_persona`, `nombre`, `apellido`, `mail`, `celular`, `t
 --
 
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `nombre` varchar(45) DEFAULT NULL,
+  `userName` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   `id_perfil` int(11) DEFAULT NULL,
   `id_persona` int(11) DEFAULT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `mail` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`nombre`, `password`, `id_perfil`, `id_persona`, `id_usuario`) VALUES
-('nico', 'nico', 1, 33, 1);
+INSERT INTO `usuario` (`userName`, `password`, `id_perfil`, `id_persona`, `id`, `mail`) VALUES
+('qq', 'qq', 1, 1, 1, '');
 
 --
 -- Índices para tablas volcadas
@@ -179,7 +176,7 @@ ALTER TABLE `persona`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -189,17 +186,17 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `aux_agenda_persona`
 --
 ALTER TABLE `aux_agenda_persona`
-  MODIFY `id_aux_agenda_persona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id_aux_agenda_persona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- Restricciones para tablas volcadas
 --
@@ -216,13 +213,13 @@ ADD CONSTRAINT `fk_aux_agenda_persona_mensaje1` FOREIGN KEY (`mensaje_id_mensaje
 -- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
-ADD CONSTRAINT `fk_persona_usuario1` FOREIGN KEY (`usuario_id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_persona_usuario1` FOREIGN KEY (`usuario_id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-ADD CONSTRAINT `fk_usuario_perfil1` FOREIGN KEY (`id_usuario`) REFERENCES `perfil` (`id_perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_usuario_perfil1` FOREIGN KEY (`id`) REFERENCES `perfil` (`id_perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
