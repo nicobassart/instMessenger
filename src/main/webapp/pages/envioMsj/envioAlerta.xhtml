@@ -57,7 +57,7 @@
 					<p:panel header="En dos simples pasos podrás enviar los mensajes que quieras" style="height:100%;text-align: center">
 
 					
-						<p:wizard flowListener="#{personaBean.onFlowProcess}"  widgetVar="myWizard" showNavBar="false" effect="fade" showStepStatus="true" onnext="hideBackOnLastTab();" >
+						<p:wizard flowListener="#{personaBean.onFlowProcess}" nextLabel="Siguiente" backLabel="Atras"  widgetVar="myWizard" showNavBar="true" effect="drop" showStepStatus="true" onnext="PF('myWizard').hideNextNav();hideBackOnLastTab();" >
 							
 							<p:tab id="cargaPersonas"  style="height:475px"  >
 							
@@ -206,13 +206,13 @@
 
 						</p:wizard>
 						
-						<div class="ui-grid ui-grid-responsive">
+<!-- 						<div class="ui-grid ui-grid-responsive">
 						    <div class="ui-grid-row">
 						        <div class="ui-grid-col-6" align="center"><p:commandButton value="Volver" icon="ui-icon-arrow-1-w"  iconPos="right" type="button" onclick="PF('myWizard').back();" /></div>
 						        <div class="ui-grid-col-6" align="center"><p:commandButton value="Siguiente" icon="ui-icon-arrow-1-e" iconPos="left" type="button" onclick="PF('myWizard').next();" /></div>
 						    </div>
 						</div>
-					</p:panel>
+ -->					</p:panel>
 				</h:form>
 
 			</ui:define>
