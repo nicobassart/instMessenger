@@ -23,38 +23,38 @@
 							<p:layoutUnit position="center">
 								<p:panel header="El mensaje fue enviados a los siguientes destinatarios" style="border:0">
 									<h:messages errorClass="error" />
-									<p:dataTable var="persona" value="#{personaBean.personas}"
+									<p:dataTable var="persona" value="#{personaBean.personas}" paginator="true" rows="10"
 										selection="#{personaBean.selectedPersonas}" id="personasList"
 										editable="true" rowKey="#{persona.nombre}"
 										rowIndexVar="#{persona}">
 
 										<p:column selectionMode="multiple" style="width:18px" headerText="Check"/>
 										
-										<p:column headerText="Apellido y Nombre" style="width:50px">
+										<p:column headerText="Apellido y Nombre" width="30">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
 										</p:column>
 
-										<p:column headerText="Celular" style="width:25%">
+										<p:column headerText="Celular" width="15">
 											<h:outputText value="#{persona.celular}" />
 										</p:column>
 
-										<p:column headerText="Estado" style="width:50px">
+										<p:column headerText="Estado" width="10">
 											<h:outputText value="#{persona.estado}" style="width:50px" />
 										</p:column>
 
 
 									</p:dataTable>
 									<div align="center" >
+										<p:commandButton
+											value="Agregar Seleccionados en Agenda existente"
+											id="btnAgregarEnAgenda" oncomplete="PF('agregarEnAgendaDialog').show()"
+											icon="ui-icon-disk" title="Crear Nueva Agenda"
+											update=":agregarEnAgendaForm"/>
 										<p:commandButton value="Agregar Seleccionados en nueva Agenda"
-											id="btnNuevaAgenda" oncomplete="nuevaAgendaDialog.show()"
+											id="btnNuevaAgenda" oncomplete="PF('nuevaAgendaDialog').show()"
 											icon="ui-icon-disk" title="Crear Nueva Agenda"
 											update=":nuevaAgendaForm" />
 										<p:spacer width="100"></p:spacer>
-										<p:commandButton
-											value="Agregar Seleccionados en Agenda existente"
-											id="btnAgregarEnAgenda" oncomplete="agregarEnAgendaDialog.show()"
-											icon="ui-icon-disk" title="Crear Nueva Agenda"
-											update=":agregarEnAgendaForm"/>
 									</div>
 									<br/>
 									<div align="right" >
@@ -89,7 +89,7 @@
 							<p:watermark for="descAgenda" value="Descripción de la Agenda" />
 
 
-							<p:dataTable var="persona"	value="#{personaBean.selectedPersonas}"
+							<p:dataTable var="persona"	value="#{personaBean.selectedPersonas}" paginator="true" rows="10"
 								id="tablePersonasNueva" editable="true">
 								<p:ajax event="rowEdit" listener="#{agendaBean.onEditPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda" />
@@ -97,7 +97,7 @@
 									listener="#{agendaBean.onCancelPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
 
-								<p:column headerText="Apellido, Nombre" style="width:50px">
+								<p:column headerText="Apellido, Nombre" width="30">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
@@ -110,7 +110,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" style="width:25%">
+								<p:column headerText="Celular" width="15">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.celular}" />
@@ -120,7 +120,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" style="width:50px">
+								<p:column headerText="Estado" width="10">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.estado}" style="width:50px" />
@@ -134,7 +134,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" style="width:2%">
+								<p:column headerText="Opciones" width="10">
 									<p:rowEditor />
 									<h:commandLink
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
@@ -154,8 +154,8 @@
 							<f:facet name="footer">
 								<p:commandButton value="Guardar" id="btnGuardarNueva"
 									update=":form"
-									actionListener="#{agendaBean.agregarSeleccionadosEnAgenda}"
-									oncomplete="if (!args.validationFailed) nuevaAgendaDialog.hide()" />
+									actionListener="#{agendaBean.agregarAgenda}"
+									oncomplete="if (!args.validationFailed) PF('nuevaAgendaDialog').hide()" />
 							</f:facet>
 							
 						</p:panelGrid>
@@ -186,13 +186,13 @@
 							<br></br>
 							<br></br>
 							<p:selectOneMenu required="false"
-								value="#{personaBean.selectedAgenda}">
+								value="#{agendaBean.selectedAgendaNombre}">
 								<f:selectItem itemLabel="Seleccionar" itemValue="" />
 								<f:selectItems value="#{agendaBean.agendas}" var="agenda"
 									itemValue="#{agenda.nombre}" itemLabel="#{agenda.nombre}" />
 							</p:selectOneMenu>
 
-							<p:dataTable var="persona"	value="#{personaBean.selectedPersonas}"
+							<p:dataTable var="persona"	value="#{personaBean.selectedPersonas}" paginator="true" rows="10"
 								id="tablePersonasNueva" editable="true">
 								<p:ajax event="rowEdit" listener="#{agendaBean.onEditPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda" />
@@ -200,7 +200,7 @@
 									listener="#{agendaBean.onCancelPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda, :agregarEnAgendaForm:displayAgregarEnAgenda" />
 
-								<p:column headerText="Apellido, Nombre" style="width:50px">
+								<p:column headerText="Apellido, Nombre" width="30">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
@@ -213,7 +213,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" style="width:25%">
+								<p:column headerText="Celular" width="15">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.celular}" />
@@ -223,7 +223,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" style="width:50px">
+								<p:column headerText="Estado" width="10">
 									<p:cellEditor>
 										<f:facet name="output">
 											<h:outputText value="#{persona.estado}" style="width:50px" />
@@ -237,7 +237,7 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" style="width:2%">
+								<p:column headerText="Opciones" width="10">
 									<p:rowEditor />
 									<h:commandLink
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
@@ -257,8 +257,8 @@
 							<f:facet name="footer">
 								<p:commandButton value="Guardar" id="btnGuardarNueva"
 									update=":form"
-									actionListener="#{agendaBean.agregarAgenda}"
-									oncomplete="if (!args.validationFailed) nuevaAgendaDialog.hide()" />
+									actionListener="#{agendaBean.agregarSeleccionadosEnAgenda}"
+									oncomplete="if (!args.validationFailed) PF('agregarEnAgendaDialog').hide()" />
 							</f:facet>
 							
 						</p:panelGrid>

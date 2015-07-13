@@ -46,16 +46,17 @@
 									<br></br>
 									<br></br>
 									<div align="center">
+										<p:commandButton
+											value="Agregar Seleccionados en Agenda existente"
+											id="btnAgregarEnAgenda" oncomplete="PF('agregarEnAgendaDialog').show()"
+											icon="ui-icon-star" title="Crear Nueva Agenda"
+											update=":agregarEnAgendaForm" />
+											
 										<p:commandButton value="Agregar seleccionados en nueva Agenda"
-											id="btnNuevaAgenda" oncomplete="nuevaAgendaDialog.show()"
+											id="btnNuevaAgenda" oncomplete="PF('nuevaAgendaDialog').show()"
 											icon="ui-icon-star" title="Crear Nueva Agenda"
 											update=":nuevaAgendaForm" />
 
-										<p:commandButton
-											value="Agregar Seleccionados en Agenda existente"
-											id="btnAgregarEnAgenda" oncomplete="agregarEnAgendaDialog.show()"
-											icon="ui-icon-star" title="Crear Nueva Agenda"
-											update=":agregarEnAgendaForm" />
 									</div>
 								</p:panel>
 							</p:layoutUnit>
@@ -63,6 +64,109 @@
 
 					</p:panel>
 				</h:form>
+				
+				<p:dialog header="Crear Nueva Agenda" widgetVar="nuevaAgendaDialog" width="900px"
+					resizable="false" id="nuevaAgendaDialog">
+					<p:ajax event="close" listener="#{agendaBean.onCancel}"
+						update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
+					<h:form id="nuevaAgendaForm">
+						<p:growl id="growNuevaAgenda" showDetail="true" life="5000" />
+						<p:panelGrid id="displayNuevaAgenda" columns="2" cellpadding="4"
+							style="margin:0 auto;">
+
+
+							<p:inputText value="#{agendaBean.nuevaAgenda.nombre}" 
+								id="nombreAgenda" maxlength="18" required="true"
+								requiredMessage="Por favor, ingrese un nombre!" />
+							<p:watermark for="nombreAgenda" value="Nombre de la Agenda" />
+
+							<p:inputText value="#{agendaBean.nuevaAgenda.descripcion}"
+								id="descAgenda" maxlength="150" required="true"
+								requiredMessage="Por favor, ingrese una descripción!" />
+							<p:watermark for="descAgenda" value="Descripción de la Agenda" />
+
+
+							<p:dataTable var="persona"
+								value="#{agendaBean.nuevaAgenda.personas}"
+								id="tablePersonasNueva" editable="true">
+								<p:ajax event="rowEdit" listener="#{agendaBean.onEditPersona}"
+									update=":nuevaAgendaForm:growNuevaAgenda" />
+								<p:ajax event="rowEditCancel"
+									listener="#{agendaBean.onCancelPersona}"
+									update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
+
+								<p:column headerText="Apellido, Nombre" width="30">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{persona.apellido}" id="apellido" maxlength="15"/>
+											<p:watermark for="apellido" value="Apellido" />
+											<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15"/>
+											<p:watermark for="nombre" value="Nombre" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Celular" width="15">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{persona.celular}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{persona.celular}" style="width:100%" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Estado" width="10">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{persona.estado}" style="width:50px" />
+										</f:facet>
+										<f:facet name="input" style="width:50px">
+											<p:selectOneMenu value="#{persona.estado}" style="width:100%">
+												<f:selectItem itemLabel="Select One" itemValue="" />
+												<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
+												<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
+											</p:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Opciones" width="10">
+									<p:rowEditor />
+									<h:commandLink
+										actionListener="#{agendaBean.eliminarPersona(persona)}"
+										update=":nuevaAgendaForm:tablePersonasNueva">
+										<f:ajax render=":nuevaAgendaForm:tablePersonasNueva" />
+										<span class="ui-icon ui-icon-trash"></span>
+									</h:commandLink>
+								</p:column>
+								<f:facet name="footer">
+									<p:commandButton value="Agregar Persona" validateClient="true"
+										id="btnAgregarPersonaNueva"
+										update=":nuevaAgendaForm:tablePersonasNueva, :nuevaAgendaForm:displayNuevaAgenda, :nuevaAgendaForm"
+										actionListener="#{agendaBean.agregarPersona}"
+										oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
+								</f:facet>
+							</p:dataTable>
+
+							<f:facet name="footer">
+								<p:commandButton value="Guardar" id="btnGuardarNueva"
+									update=":agendaDetailForm, :nuevaAgendaForm,:form:dataTable,:growl"
+									actionListener="#{agendaBean.agregarAgenda}"
+									oncomplete="if (!args.validationFailed) PF('nuevaAgendaDialog').hide()" />
+							</f:facet>
+
+						</p:panelGrid>
+
+						<p:blockUI block="displayNuevaAgenda"
+							trigger="tablePersonasNueva:btnAgregarPersonaNueva, btnGuardarNueva">
+								Un momento por favor...<br />
+							<p:graphicImage value="http://img.mensajeados.com.ar/ajax-loader.gif" />
+						</p:blockUI>
+
+					</h:form>
+				</p:dialog>
 				
 			</ui:define>
 		</ui:composition>
