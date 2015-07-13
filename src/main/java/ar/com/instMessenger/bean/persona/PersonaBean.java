@@ -19,8 +19,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.instMessenger.bean.Bean;
+import ar.com.instMessenger.bean.usuarios.UsuarioBean;
 import ar.com.instMessenger.entity.Agenda;
 import ar.com.instMessenger.entity.Persona;
+import ar.com.instMessenger.entity.Usuario;
+import ar.com.instMessenger.servicios.dao.IUsuariosDao;
 import ar.com.instMessenger.servicios.dao.agenda.IAgendaDao;
 import ar.com.instMessenger.servicios.dao.persona.IPersonaDao;
 
@@ -31,6 +34,11 @@ public class PersonaBean extends Bean {
 
 	private static final int ROWS_DATATABLE = 10;
 
+	@Autowired
+	IUsuariosDao usuariosDao;
+	@Autowired
+	UsuarioBean usuarioBean;
+	
 	@Autowired
 	IPersonaDao personaDAO;
 	
@@ -47,9 +55,23 @@ public class PersonaBean extends Bean {
 
 	@PostConstruct
 	public void postConstructor() {
-		personas = personaDAO.getPersonas();
+		//personas = personaDAO.getPersonas();
+		this.getAgendaDefoult();
 	}
+	//Si el tipo tiene al menos una agenda la cargamos.
+	private void getAgendaDefoult(){
+		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
+		
+		List<Agenda> listAgenda = agendaDAO.getAgendas(usuario.getId());
+		
+		if(listAgenda!=null && !listAgenda.isEmpty()){
+			
+			Agenda agenda=listAgenda.get(0);
 
+			if(agenda!=null)
+				personas = agenda.getPersonas();
+		}
+	}
 	public void agregarPersona(ActionEvent event) {
 		Persona persona = new Persona();
 		persona.setEstado("ACTIVO");

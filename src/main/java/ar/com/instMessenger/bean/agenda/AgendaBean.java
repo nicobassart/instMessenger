@@ -19,11 +19,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.instMessenger.bean.Bean;
 import ar.com.instMessenger.bean.persona.PersonaBean;
-import ar.com.instMessenger.bean.usuarios.UsuarioBean;
 import ar.com.instMessenger.entity.Agenda;
 import ar.com.instMessenger.entity.Persona;
-import ar.com.instMessenger.entity.Usuario;
-import ar.com.instMessenger.servicios.dao.IUsuariosDao;
 import ar.com.instMessenger.servicios.dao.agenda.IAgendaDao;
 
 @Named
@@ -34,12 +31,6 @@ public class AgendaBean extends Bean {
 	@Autowired
 	IAgendaDao agendaDAO;
 	
-	@Autowired
-	UsuarioBean usuarioBean;	
-	
-	@Autowired
-	IUsuariosDao usuariosDao;
-
 	@Autowired
 	PersonaBean personaBean;
 	
@@ -59,24 +50,10 @@ public class AgendaBean extends Bean {
 	public void postConstructor() {
 		agendas = agendaDAO.getAgendas();
 		nuevaAgenda.setPersonas(new ArrayList<Persona>());
-		personas = this.getAgendaDefoult();
+
 	}
 	
-	private List<Persona> getAgendaDefoult(){
-		
-		Usuario usuario = usuariosDao.getUsuario(usuarioBean.getUserName());
-		
-		List<Agenda> listAgenda = agendaDAO.getAgendas(usuario.getId());
-		
-		if(listAgenda!=null && !listAgenda.isEmpty()){
-			
-			Agenda agenda=listAgenda.get(0);
 
-			if(agenda!=null)
-				return agenda.getPersonas();
-		}
-		return null;
-	}
 	public void agregarAgenda(ActionEvent event) {
 		FacesMessage msg;
 		if (agendas.contains(nuevaAgenda)) {
