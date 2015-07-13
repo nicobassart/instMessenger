@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2015 a las 04:22:11
+-- Tiempo de generación: 13-07-2015 a las 07:27:36
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -125,7 +125,7 @@ INSERT INTO `persona` (`id_persona`, `nombre`, `apellido`, `mail`, `celular`, `t
 CREATE TABLE IF NOT EXISTS `usuario` (
   `userName` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `id_perfil` int(11) DEFAULT NULL,
+  `id_perfil` int(11) NOT NULL,
   `id_persona` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL,
   `mail` varchar(100) NOT NULL
@@ -136,7 +136,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`userName`, `password`, `id_perfil`, `id_persona`, `id`, `mail`) VALUES
-('qq', 'qq', 1, 1, 1, '');
+('puta', 'madre', 1, NULL, 0, '222'),
+('qq', 'qq', 1, 1, 1, ''),
+('tt', 'tt', 1, 1, 3, 'tt');
 
 --
 -- Índices para tablas volcadas
@@ -176,7 +178,7 @@ ALTER TABLE `persona`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`), ADD KEY `id_perfil` (`id_perfil`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -210,16 +212,10 @@ ADD CONSTRAINT `agenda_persona_ibfk_2` FOREIGN KEY (`id_persona`) REFERENCES `pe
 ADD CONSTRAINT `fk_aux_agenda_persona_mensaje1` FOREIGN KEY (`mensaje_id_mensaje`) REFERENCES `mensaje` (`id_mensaje`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `persona`
---
-ALTER TABLE `persona`
-ADD CONSTRAINT `fk_persona_usuario1` FOREIGN KEY (`usuario_id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-ADD CONSTRAINT `fk_usuario_perfil1` FOREIGN KEY (`id`) REFERENCES `perfil` (`id_perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `fk_usuario_perfil1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
