@@ -25,9 +25,11 @@
 				
 					function cont(){
 						var caracteresPorSms = 160;
+						$("#form\\:msj").attr('maxlength','160');
 						var caracteresReemplazados = $("#form\\:msj").val().replace("@NOMBRE","111111111111111").replace("@APELLIDO","111111111111111") ;
 						if( tieneAcentos($("#form\\:msj").val())  ){
 							caracteresPorSms = 70;
+							$("#form\\:msj").attr('maxlength','70');
 						}	
 						$('#form\\:caracteres').text("Cantidad de Letras del mensaje: " 
 								  + caracteresReemplazados.length + "&nbsp;&nbsp;&nbsp;&nbsp; " + Math.ceil(caracteresReemplazados.length/caracteresPorSms) + " SMS por Destinatario" );
@@ -210,7 +212,7 @@
 
 									<h:panelGrid columns="2">
  										<p:inputTextarea id="msj" value="#{envioMensajeAction.texto}" completeMethod="#{envioAlertaView.completeArea}" rows="5"
-											cols="50" queryDelay="750" minQueryLength="1" onkeyup="cont()"/>
+											cols="50" queryDelay="750" minQueryLength="1" onkeyup="cont()" maxlength="160"/>
 										<h:outputText value="Personaliza tú mensaje, Sr/Sra. @NOMBRE , @APELLIDO nos ponemos en contacto..."   />
 									</h:panelGrid>
 									<h:panelGrid columns="1">
