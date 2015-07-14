@@ -41,24 +41,29 @@
 				<h:form id="form">
 
 					<p:growl id="mensaje" showDetail="true" sticky="true" />
-
-					<p:panel style="height:100%;text-align: center">
+					
+					
+					<div class="ui-grid ui-grid-responsive">
+					<!-- <p:panel style="height:100%;text-align: center"> -->
 
 					
 						<p:wizard flowListener="#{personaBean.onFlowProcess}" nextLabel="Siguiente" backLabel="Atras"  widgetVar="myWizard" showNavBar="true" effect="drop" showStepStatus="true" >
 							
-							<p:tab id="cargaPersonas"  style="height:475px"  >
+							<p:tab id="cargaPersonas"  >
 							
 					        	<f:facet name="title">
 					               <!-- <h:outputText value="Contactos"/> -->
 					               <p:graphicImage value="http://img.mensajeados.com.ar/contactos.png"/>
 					            </f:facet>
 					            
-								<p:layout style="height:100%">
+					            
+					            
+<div class="ui-grid ui-grid-responsive">
+    <div class="ui-grid-col-9">
+		<div class="alert alert-info" role="alert">DESTINATARIOS DEL MENSAJE</div>
 
-									<p:layoutUnit position="center">
 
-										<p:panel id="pnlDestMsj" header="Destinatarios del Mensaje"
+										<p:panel id="pnlDestMsj"
 											style="border:0">
 
 											<h:messages errorClass="error" />
@@ -125,17 +130,17 @@
 													</h:commandLink>
 												</p:column>
 												<f:facet name="footer">
-													<p:commandButton value="Nuevo Destinatario"
+													<p:commandButton value="Nuevo Destinatario" style="width: 200px;font-size:80%;"
 														id="btnNuevoDest" update=":form:personasList"
 														actionListener="#{personaBean.agregarPersona}"
-														styleClass="ui-priority-primary"
+														icon="ui-icon-document"
  														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
 <!-- 														oncomplete="widgetVar.getPaginator().setPage(widgetVar.getPaginator().getRowCount()/7);" /> -->
 														<!-- oncomplete="alert(widgetVar.getPaginator().getLastPageLink())" /> -->
-														<p:commandButton value="Borrar Tabla"
+														<p:commandButton value="Borrar Tabla" style="width: 200px;font-size:80%;"
 															id="btnBorrarPersonas" update=":form:personasList"
 															actionListener="#{personaBean.eliminarPersonas}"
-															styleClass="ui-priority-primary"
+															icon="ui-icon-trash"
 	 														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
 												</f:facet>
 											</p:dataTable>
@@ -146,28 +151,54 @@
 													Un momento por favor...<br />
 											<p:graphicImage value="http://img.mensajeados.com.ar/ajax-loader.gif" />
 										</p:blockUI>
-									</p:layoutUnit>
-									
-									<p:layoutUnit position="east" size="300" header="Agendas" resizable="true" closable="true" collapsible="true" effect="slide"  >
-										<div align="center" style="padding-top: 10px;" >
-											<p:selectOneMenu required="false"
-												value="#{personaBean.selectedAgenda}">
+
+
+
+
+</div>
+    <div class="ui-grid-col-3">
+		<div class="alert alert-success" role="alert">AGENDAS</div>
+    					<div class="ui-grid ui-grid-responsive">
+						    <div class="ui-grid-row" align="center">
+						        <div class="ui-grid-col-12" >
+						        	<div class="col-md-0">
+						        		<p class="text-center">
+						        			<p:selectOneMenu required="false" value="#{personaBean.selectedAgenda}" style="width: 200px;font-size:80%;"  >
 												<f:selectItem itemLabel="Seleccionar" itemValue="" />
 												<f:selectItems value="#{agendaBean.agendas}" var="agenda"
 													itemValue="#{agenda.nombre}" itemLabel="#{agenda.nombre}" />
 											</p:selectOneMenu>
-	
+										</p>
+						        
+						        	</div>
+						        </div>
+						    </div>
+
+						    <div class="ui-grid-row" align="center">
+						        <div class="ui-grid-col-12" >
+						        <p class="text-center">
 											<p:commandButton value="Agregar Agenda" id="btnAgregarAgenda"
 												actionListener="#{personaBean.agregarPersonas}"
-												update=":form:personasList"  />
-										</div>
-										<br></br>
-										<br></br>
-										<p:commandButton value="Modificar Agendas" id="btnAbmAgendas"
-												actionListener="#{personaBean.abmAgendas}" />
-
-									</p:layoutUnit>
-								</p:layout>
+												update=":form:personasList" style="width: 200px;font-size:80%;" />
+						        </p>
+						        
+						        </div>
+						    </div>
+						    <div class="ui-grid-row" align="center">
+						        <div class="ui-grid-col-12" >
+						        <p class="text-center">
+										<p:commandButton value="Modificar Agendas" id="btnAbmAgendas" actionListener="#{personaBean.abmAgendas}" style="width: 200px;font-size:80%;" />
+						        
+						        </p>
+						        
+						        </div>
+						    </div>
+						</div>
+    
+    </div>
+</div>
+					            
+					            
 							</p:tab>
 
 							<p:tab id="cargarMensaje" title="Mensaje">
@@ -194,13 +225,8 @@
 
 						</p:wizard>
 						
-<!-- 						<div class="ui-grid ui-grid-responsive">
-						    <div class="ui-grid-row">
-						        <div class="ui-grid-col-6" align="center"><p:commandButton value="Volver" icon="ui-icon-arrow-1-w"  iconPos="right" type="button" onclick="PF('myWizard').back();" /></div>
-						        <div class="ui-grid-col-6" align="center"><p:commandButton value="Siguiente" icon="ui-icon-arrow-1-e" iconPos="left" type="button" onclick="PF('myWizard').next();" /></div>
-						    </div>
+
 						</div>
- -->					</p:panel>
 				</h:form>
 
 			</ui:define>
