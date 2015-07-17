@@ -32,7 +32,62 @@
 			<ui:insert name="body" />
 		</p:layoutUnit>
 	</p:layout>
-	
+
+
+			<!-- Script creado para evitar el refresco de la pagina presionando F5 -->
+		<script type="text/javascript">
+
+		javascript:window.history.forward(1);
+		 
+		 // check the browser type  
+		  function whichBrs() {  
+			  var agt=navigator.userAgent.toLowerCase();  
+			  if (agt.indexOf("opera") != -1) return 'Opera';  
+			  if (agt.indexOf("firefox") != -1) return 'Firefox';  
+			  if (agt.indexOf("safari") != -1) return 'Safari';  
+			  if (agt.indexOf("msie") != -1) return 'Internet Explorer';  
+			  if (agt.indexOf("netscape") != -1) return 'Netscape';  
+			  if (agt.indexOf("mozilla/5.0") != -1) return 'Mozilla'; 
+			  if (agt.indexOf("chrome") != -1) return 'Chrome'; 
+			  
+			  if (agt.indexOf('\/') != -1) {  
+				  if (agt.substr(0,agt.indexOf('\/')) != 'mozilla') {  
+				 	 return navigator.userAgent.substr(0,agt.indexOf('\/'));  
+				  }else  
+				 	 return 'Netscape';  
+			  }else if (agt.indexOf(' ') != -1)  
+				  	return navigator.userAgent.substr(0,agt.indexOf(' '));  
+				   else  
+				 	 return navigator.userAgent;  
+		  }  
+		  
+		  
+		  var browser = whichBrs();  
+		  
+		  
+		 if (browser == 'Firefox'|| browser == 'Opera' || browser=='Chrome'){
+		   document.onkeypress = function(e){
+		 	var test_var=e.target.nodeName.toUpperCase();
+		 	if (e.target.type) var test_type=e.target.type.toUpperCase();
+		 	if ((test_var == 'INPUT' &amp;&amp; (test_type == 'TEXT' || test_type == 'PASSWORD')) || test_var == 'TEXTAREA'){
+		 	  return e.keyCode;
+		 	}else if (e.keyCode == 8){
+		 	  e.preventDefault()
+		 	}
+		   }
+		 }else{
+		   document.onkeydown = function(){
+		 	var test_var=event.srcElement.tagName.toUpperCase();
+		 	if (event.srcElement.type) var test_type=event.srcElement.type.toUpperCase();
+		 	if ((test_var == 'INPUT' &amp;&amp; (test_type == 'TEXT' || test_type == 'PASSWORD')) || test_var == 'TEXTAREA'){
+		 	  return event.keyCode;
+		 	}else if (event.keyCode == 8 ){
+		 	 	event.returnValue=false;
+			 	return false;
+		 	}
+		   }
+		 }
+		</script>
 </body>
 
 </html>

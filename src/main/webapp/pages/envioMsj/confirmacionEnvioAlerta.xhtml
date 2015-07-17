@@ -6,11 +6,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
-	<title>Edit Auth Page</title>
-</h:head>
-
 <body>
 	<f:view>
 		<ui:composition template="/pages/template.xhtml">
@@ -24,9 +19,8 @@
 								<p:panel header="El mensaje fue enviados a los siguientes destinatarios" style="border:0">
 									<h:messages errorClass="error" />
 									<p:dataTable var="persona" value="#{personaBean.personas}" paginator="true" rows="10"
-										selection="#{personaBean.selectedPersonas}" id="personasList"
-										editable="true" rowKey="#{persona.nombre}"
-										rowIndexVar="#{persona}">
+										selection="#{personaBean.selectedPersonas}" selectionMode="single" id="personasList"
+										editable="true" rowKey="#{persona.nombre}" rowIndexVar="#{persona}">
 
 										<p:column selectionMode="multiple" style="width:18px" headerText="Check"/>
 										
