@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <body>
 	
@@ -42,7 +43,7 @@
 
 				<h:form id="form">
 
-					<p:growl id="mensaje" showDetail="true" sticky="true" />
+					<p:growl id="mensaje" showDetail="false"  sticky="true" />
 					
 					
 					<div class="ui-grid ui-grid-responsive">
@@ -71,7 +72,7 @@
 
 											<p:dataTable paginatorAlwaysVisible="false" var="persona" value="#{personaBean.personas}"
 												id="personasList" editable="true" rows="10" widgetVar="widgetVar"
-                         						paginator="true"
+                         						paginator="true" reflow="true" 
                          						emptyMessage="Debes cargar contactos.">
 <!--                          						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          						rowsPerPageTemplate="5,10,15" -->
@@ -80,50 +81,73 @@
 												<p:ajax event="rowEditCancel"
 													listener="#{personaBean.onCancel}" update=":form:mensaje" />
 
-												<p:column headerText="Apellido y Nombre" width="30">
+												<p:column headerText="Apellido y Nombre" style="width:50%" >
 													<p:cellEditor>
 														<f:facet name="output">
 															<h:outputText
 																value="#{persona.apellido}, #{persona.nombre}" />
 														</f:facet>
 														<f:facet name="input">
-															<h:inputText value="#{persona.apellido}" id="apellido" maxlength="15"/>
-															<p:watermark for="apellido" value="Apellido" />
-															<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15"/>
-															<p:watermark for="nombre" value="Nombre" />
+<!-- 															<h:inputText  value="#{persona.apellido}" id="apellido" >
+																<f:validateLength minimum="5" maximum="15" />
+																
+															</h:inputText>				 
+															<p:watermark for="apellido" value="Apellido" />-->
+															
+															<p:inputMask id="apellido" label="Apellido" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.apellido}" placeholder="Apellido">
+																<f:validateLength minimum="2" maximum="15" />
+															</p:inputMask>
+															<!-- <pe:tooltip value="Type any value to filter datatable" for="apellido"  shared="true" atPosition="top center" myPosition="bottom center"/> -->  
+<!-- 															<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15">
+																<f:validateLength minimum="5" maximum="15" />
+															</h:inputText>
+															<p:watermark for="nombre" value="Nombre" /> -->
+															<p:inputMask id="nombre" label="Nombre" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.nombre}" placeholder="Nombre">
+																<f:validateLength minimum="2" maximum="115" />
+															</p:inputMask>
+															
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
-												<p:column headerText="Celular" width="15">
+												<p:column headerText="Celular" style="width:30%">
 													<p:cellEditor>
 														<f:facet name="output">
 															<h:outputText value="#{persona.celular}" />
 														</f:facet>
 														<f:facet name="input">
-															<h:inputText value="#{persona.celular}"
-																style="width:100%" id="celular" />
-															<p:watermark for="celular" value="Celular" />
+															<p:inputMask id="pefijo" label="Prefijo"  maxlength="5" size="6" required="true"  mask="099?99" placeholder="(99999)" value="#{persona.celular}">
+																<f:validateLength minimum="2" maximum="6" />
+															</p:inputMask>
+															<p:inputMask id="celular" label="Celular" maxlength="8" size="14" required="true" mask="15-999999?99" placeholder="15-99999999" value="#{persona.celular}">
+																<f:validateLength minimum="5" maximum="11" />
+															</p:inputMask>
+<!-- 															<h:inputText value="#{persona.celular}"
+																style="width:100%" id="celular" title="Número de telefono sin ceros y sin 15.">
+																	<f:validateLength minimum="6" maximum="14" />
+																	<pe:keyFilter regEx="/[0-9_]/i" />
+																	
+															</h:inputText> -->
+															<!-- <p:watermark for="celular" value="Celular" /> -->
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
-												<p:column headerText="Estado" width="10">
+												<p:column headerText="Estado" style="width:10%" >
 													<p:cellEditor>
 														<f:facet name="output">
-															<h:outputText value="#{persona.estado}"
-																style="width:50px" />
+															<p:selectBooleanCheckbox value="#{persona.estado}" disabled="true"	/>
 														</f:facet>
-														<f:facet name="input" style="width:50px">
-															<p:selectOneMenu value="#{persona.estado}"
-																style="width:100%">
-																<f:selectItem itemLabel="Select One" itemValue="" />
+														<f:facet name="input" >
+															<p:selectBooleanCheckbox value="#{persona.estado}"	/>
+<!-- 																<f:selectItem itemLabel="Select One" itemValue="" />
 																<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
 																<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
-															</p:selectOneMenu>
+ 															</p:selectBooleanCheckbox >
+ 															-->
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
-												<p:column headerText="Opciones" width="10">
-													<p:rowEditor />
+												<p:column headerText="Opciones" style="width:10%" >
+													<p:rowEditor  />
 													<h:commandLink
 														action="#{personaBean.eliminarPersona(persona)}"
 														update="personasList">
@@ -228,8 +252,11 @@
 						
 
 						</div>
+				 <pe:tooltip global="true" myPosition="left center" atPosition="right center" />
 				</h:form>
-
+				
+				<!--  <pe:tooltip  global="true" value="This tooltip uses slide effect for the animation" showEffect="slideToggle"  
+                    hideEffect="slideToggle" showDelay="0" myPosition="left center" atPosition="right center"/> -->    
 			</ui:define>
 		</ui:composition>
 
