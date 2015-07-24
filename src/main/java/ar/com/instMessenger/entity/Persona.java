@@ -18,12 +18,21 @@ public class Persona implements Serializable {
 	private String nombre;
 	private String apellido;
 	private String mail;
+	private String celularArea;
 	private String celular;
 	private String estado;
 	private String tipoDocumento;
 	private String numeroDocumento;
 	
 	
+	public String getCelularArea() {
+		return celularArea;
+	}
+
+	public void setCelularArea(String celularArea) {
+		this.celularArea = celularArea;
+	}
+
 	public int getId() {
 		return id;
 	}

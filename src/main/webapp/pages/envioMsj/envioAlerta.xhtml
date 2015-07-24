@@ -112,10 +112,11 @@
 												<p:column headerText="Celular" style="width:30%">
 													<p:cellEditor>
 														<f:facet name="output">
+															(<h:outputText value="#{persona.celularArea}" />)
 															<h:outputText value="#{persona.celular}" />
 														</f:facet>
 														<f:facet name="input">
-															<p:inputMask id="pefijo" label="Prefijo"  maxlength="5" size="6" required="true"  mask="099?99" placeholder="(99999)" value="#{persona.celular}">
+															<p:inputMask id="pefijo" label="Prefijo"  maxlength="5" size="6" required="true"  mask="099?99" placeholder="(99999)" value="#{persona.celularArea}">
 																<f:validateLength minimum="2" maximum="6" />
 															</p:inputMask>
 															<p:inputMask id="celular" label="Celular" maxlength="8" size="14" required="true" mask="15-999999?99" placeholder="15-99999999" value="#{persona.celular}">

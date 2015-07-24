@@ -52,11 +52,12 @@ public class EnvioMensajeAction extends Action implements IEnvioMensajeAction {
 //
 //	    template.convertAndSend(message);
 		if(persona!=null && persona.getCelular()!=null && persona.getCelular().length()>=6){
-			servicioColas.encolarMensaje(utilsBean.reemplazarContenido(this.texto, persona), persona.getCelular());
-			logger.info("Encolando Cel: " + persona.getCelular());
+			String celular = persona.getCelularArea().substring(1)+ persona.getCelular().substring(3);
+			servicioColas.encolarMensaje(utilsBean.reemplazarContenido(this.texto, persona),celular);
+			logger.info("Encolando Cel: " +  persona.getCelularArea() + persona.getCelular());
 		}else{
 			if(persona!=null && persona.getCelular()!=null)
-				logger.info(" Mensaje a Cel : " + persona.getCelular() +" no enviado.");
+				logger.info(" Mensaje a Cel : " + persona.getCelularArea()+" - " + persona.getCelular()+" no enviado.");
 			else
 				logger.error("Persona o celuar faltan y no permite hacer el envio.");
 		}
