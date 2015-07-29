@@ -95,20 +95,11 @@
 																value="#{persona.apellido}, #{persona.nombre}" />
 														</f:facet>
 														<f:facet name="input">
-<!-- 															<h:inputText  value="#{persona.apellido}" id="apellido" >
-																<f:validateLength minimum="5" maximum="15" />
-																
-															</h:inputText>				 
-															<p:watermark for="apellido" value="Apellido" />-->
-															
+														
 															<p:inputMask id="apellido" label="Apellido" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.apellido}" placeholder="Apellido">
 																<f:validateLength minimum="2" maximum="15" />
 															</p:inputMask>
-															<!-- <pe:tooltip value="Type any value to filter datatable" for="apellido"  shared="true" atPosition="top center" myPosition="bottom center"/> -->  
-<!-- 															<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15">
-																<f:validateLength minimum="5" maximum="15" />
-															</h:inputText>
-															<p:watermark for="nombre" value="Nombre" /> -->
+
 															<p:inputMask id="nombre" label="Nombre" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.nombre}" placeholder="Nombre">
 																<f:validateLength minimum="2" maximum="115" />
 															</p:inputMask>
@@ -129,13 +120,7 @@
 															<p:inputMask id="celular" label="Celular" maxlength="8" size="14" required="true" mask="15-999999?99" placeholder="15-99999999" value="#{persona.celular}">
 																<f:validateLength minimum="5" maximum="11" />
 															</p:inputMask>
-<!-- 															<h:inputText value="#{persona.celular}"
-																style="width:100%" id="celular" title="Número de telefono sin ceros y sin 15.">
-																	<f:validateLength minimum="6" maximum="14" />
-																	<pe:keyFilter regEx="/[0-9_]/i" />
-																	
-															</h:inputText> -->
-															<!-- <p:watermark for="celular" value="Celular" /> -->
+
 														</f:facet>
 													</p:cellEditor>
 												</p:column>

@@ -25,8 +25,8 @@
 						<f:facet name="header">
 		                    Agendas
 		                </f:facet>
-						<p:column selectionMode="multiple" style="width:18px" />
-						<p:column sortBy="#{agenda.nombre}">
+						<p:column selectionMode="multiple" style="width:10%;text-align: center" headerText="Check" />
+						<p:column sortBy="#{agenda.nombre}" style="width:40%">
 							<f:facet name="header">
 								<h:outputText value="Nombre" />
 							</f:facet>
@@ -37,7 +37,7 @@
 									target="#{agendaBean.selectedAgenda}" />
 							</p:commandLink>
 						</p:column>
-						<p:column sortBy="#{agenda.descripcion}">
+						<p:column sortBy="#{agenda.descripcion}" style="width:50%">
 							<f:facet name="header">
 								<h:outputText value="Descripción" />
 							</f:facet>
@@ -67,7 +67,7 @@
 				</h:form>
 
 
-				<p:dialog header="Agenda Detail" widgetVar="agendaDialog"  width="900px"
+				<p:dialog header="Agenda Detalle" widgetVar="agendaDialog"  width="900px"
 					resizable="false" id="agendaDialog">
 					<h:form id="agendaDetailForm">
 						<p:growl id="growDetail" showDetail="true" life="5000" />
@@ -91,46 +91,57 @@
 									update=":agendaDetailForm:growDetail" />
 								<p:ajax event="rowEditCancel"
 									listener="#{agendaBean.onCancelPersona}"
-									update=":agendaDetailForm:growDetail" />
+									update=":agendaDetailForm:growDetail, :agendaDetailForm:displayDetailAgenda" />
 
-								<p:column headerText="Apellido, Nombre" width="30">
+								<p:column headerText="Apellido y Nombre" style="width:50%" >
 									<p:cellEditor>
 										<f:facet name="output">
-											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
+											<h:outputText
+												value="#{persona.apellido}, #{persona.nombre}" />
 										</f:facet>
 										<f:facet name="input">
-											<h:inputText value="#{persona.apellido}" id="apellido" maxlength="15"/>
-											<p:watermark for="apellido" value="Apellido" />
-											<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15"/>
-											<p:watermark for="nombre" value="Nombre" />
+										
+											<p:inputMask  label="Apellido" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.apellido}" placeholder="Apellido">
+												<f:validateLength minimum="2" maximum="15" />
+											</p:inputMask>
+
+											<p:inputMask  label="Nombre" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.nombre}" placeholder="Nombre">
+												<f:validateLength minimum="2" maximum="115" />
+											</p:inputMask>
+											
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" width="15">
+								<p:column headerText="Celular" style="width:30%">
 									<p:cellEditor>
 										<f:facet name="output">
+											(<h:outputText value="#{persona.celularArea}" />)
 											<h:outputText value="#{persona.celular}" />
 										</f:facet>
 										<f:facet name="input">
-											<h:inputText value="#{persona.celular}"  />
+											<p:inputMask  label="Prefijo"  maxlength="5" size="6" required="true"  mask="099?99" placeholder="(99999)" value="#{persona.celularArea}">
+												<f:validateLength minimum="2" maximum="6" />
+											</p:inputMask>
+											<p:inputMask label="Celular" maxlength="8" size="14" required="true" mask="15-999999?99" placeholder="15-99999999" value="#{persona.celular}">
+												<f:validateLength minimum="5" maximum="11" />
+											</p:inputMask>
+
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" width="10">
+								<p:column headerText="Enviar"  style="width:10%;text-align: center" >
 									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{persona.estado}"/>
+										<f:facet name="output"  >
+											<p:selectBooleanCheckbox id="columEnviarOutput" value="#{persona.estado}" disabled="true" />
+											<p:tooltip for="columEnviarOutput" value="Si se encuentra activo el el mensaje sera enviado." />
 										</f:facet>
-										<f:facet name="input" >
-											<p:selectOneMenu value="#{persona.estado}" style="width:130px;">
-												<f:selectItem itemLabel="Select One" itemValue="" />
-												<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
-												<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
-											</p:selectOneMenu>
+										<f:facet name="input"  style="center" >
+											<p:selectBooleanCheckbox id="columEnviarInput" value="#{persona.estado}" />
+											<p:tooltip for="columEnviarInput" value="Si se encuentra activo el el mensaje sera enviado." />
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" width="10" >
+								<p:column headerText="Opciones" style="width:10%;text-align: center" >
 									<p:rowEditor />
 									<h:commandLink 
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
@@ -141,12 +152,18 @@
 						
 								</p:column>
 								<f:facet name="footer">
-									<p:commandButton value="Agregar Persona"
+									<p:commandButton value="Agregar Persona" validateClient="true"
 										id="btnAgregarPersonaDetail"
-										update=":agendaDetailForm:tablePersonasDetail"
+										update=":agendaDetailForm:tablePersonasDetail, :agendaDetailForm:displayDetailAgenda, :agendaDetailForm"
 										actionListener="#{agendaBean.agregarPersona}"
-										styleClass="ui-priority-primary"
-										oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); "/>
+ 										oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); "/>
+<!--									<p:commandButton value="Agregar Persona" validateClient="true"
+										id="btnAgregarPersonaNueva"
+										update=":nuevaAgendaForm:tablePersonasNueva, :nuevaAgendaForm:displayNuevaAgenda, :nuevaAgendaForm"
+										actionListener="#{agendaBean.agregarPersona}"
+										oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " /> -->
+
+										
 								</f:facet>
 							</p:dataTable>
 							<f:facet name="footer">
@@ -195,44 +212,55 @@
 									listener="#{agendaBean.onCancelPersona}"
 									update=":nuevaAgendaForm:growNuevaAgenda, :nuevaAgendaForm:displayNuevaAgenda" />
 
-								<p:column headerText="Apellido, Nombre" width="30">
+								<p:column headerText="Apellido y Nombre" style="width:50%" >
 									<p:cellEditor>
 										<f:facet name="output">
-											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
+											<h:outputText
+												value="#{persona.apellido}, #{persona.nombre}" />
 										</f:facet>
 										<f:facet name="input">
-											<h:inputText value="#{persona.apellido}" id="apellido" maxlength="15"/>
-											<p:watermark for="apellido" value="Apellido" />
-											<h:inputText value="#{persona.nombre}" id="nombre" maxlength="15"/>
-											<p:watermark for="nombre" value="Nombre" />
+										
+											<p:inputMask  label="Apellido" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.apellido}" placeholder="Apellido">
+												<f:validateLength minimum="2" maximum="15" />
+											</p:inputMask>
+
+											<p:inputMask  label="Nombre" maxlength="15" mask="a?aaaaaaaaaaaaaa" required="true" value="#{persona.nombre}" placeholder="Nombre">
+												<f:validateLength minimum="2" maximum="115" />
+											</p:inputMask>
+											
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Celular" width="15">
+								<p:column headerText="Celular" style="width:30%">
 									<p:cellEditor>
 										<f:facet name="output">
+											(<h:outputText value="#{persona.celularArea}" />)
 											<h:outputText value="#{persona.celular}" />
 										</f:facet>
 										<f:facet name="input">
-											<h:inputText value="#{persona.celular}" style="width:100%" />
+											<p:inputMask  label="Prefijo"  maxlength="5" size="6" required="true"  mask="099?99" placeholder="(99999)" value="#{persona.celularArea}">
+												<f:validateLength minimum="2" maximum="6" />
+											</p:inputMask>
+											<p:inputMask label="Celular" maxlength="8" size="14" required="true" mask="15-999999?99" placeholder="15-99999999" value="#{persona.celular}">
+												<f:validateLength minimum="5" maximum="11" />
+											</p:inputMask>
+
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Estado" width="10">
+								<p:column headerText="Enviar"  style="width:10%;text-align: center" >
 									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{persona.estado}" style="width:50px" />
+										<f:facet name="output"  >
+											<p:selectBooleanCheckbox id="columEnviarOutput" value="#{persona.estado}" disabled="true" />
+											<p:tooltip for="columEnviarOutput" value="Si se encuentra activo el el mensaje sera enviado." />
 										</f:facet>
-										<f:facet name="input" style="width:50px">
-											<p:selectOneMenu value="#{persona.estado}" style="width:100%">
-												<f:selectItem itemLabel="Select One" itemValue="" />
-												<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
-												<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
-											</p:selectOneMenu>
+										<f:facet name="input"  style="center" >
+											<p:selectBooleanCheckbox id="columEnviarInput" value="#{persona.estado}" />
+											<p:tooltip for="columEnviarInput" value="Si se encuentra activo el el mensaje sera enviado." />
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-								<p:column headerText="Opciones" width="10">
+								<p:column headerText="Opciones" style="width:10%;text-align: center">
 									<p:rowEditor />
 									<h:commandLink
 										actionListener="#{agendaBean.eliminarPersona(persona)}"
