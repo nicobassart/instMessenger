@@ -19,21 +19,23 @@
 								<p:panel header="El mensaje fue enviados a los siguientes destinatarios" style="border:0">
 									<h:messages errorClass="error" />
 									<p:dataTable var="persona" value="#{personaBean.personas}" paginator="true" rows="10"
-										selection="#{personaBean.selectedPersonas}" selectionMode="single" id="personasList"
+										selection="#{personaBean.selectedPersonas}" id="personasList"
 										editable="true" rowKey="#{persona.nombre}" rowIndexVar="#{persona}">
 
-										<p:column selectionMode="multiple" style="width:18px" headerText="Check"/>
+										<p:column selectionMode="multiple" style="width:10%;text-align: center" headerText="Check"/>
 										
-										<p:column headerText="Apellido y Nombre" width="30">
+										<p:column headerText="Apellido y Nombre" style="width:50%;">
 											<h:outputText value="#{persona.apellido}, #{persona.nombre}" />
 										</p:column>
 
-										<p:column headerText="Celular" width="15">
+										<p:column headerText="Celular" style="width:30%;text-align: center">
+											(<h:outputText value="#{persona.celularArea}" />)
 											<h:outputText value="#{persona.celular}" />
 										</p:column>
 
-										<p:column headerText="Estado" width="10">
-											<h:outputText value="#{persona.estado}" style="width:50px" />
+										<p:column headerText="Estado" style="width:10%;text-align: center">
+											<p:selectBooleanCheckbox value="#{persona.estado}" />
+											<!-- <h:outputText value="#{persona.estado}" style="width:50px" /> -->
 										</p:column>
 
 
