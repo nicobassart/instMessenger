@@ -75,7 +75,7 @@ public class PersonaBean extends Bean {
 	}
 	public void agregarPersona(ActionEvent event) {
 		Persona persona = new Persona();
-		persona.setEstado("ACTIVO");
+		persona.setEstado("true");
 		personas.add(persona);
 		
 		final DataTable d = (DataTable) FacesContext.getCurrentInstance().getViewRoot().findComponent("form:personasList");

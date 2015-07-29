@@ -12,7 +12,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.instMessenger.actions.Action;
 import ar.com.instMessenger.bean.persona.PersonaBean;
-import ar.com.instMessenger.bean.usuarios.LoginBean;
 import ar.com.instMessenger.bean.utils.UtilsBean;
 import ar.com.instMessenger.entity.Persona;
 import ar.com.instMessenger.servicios.colas.IServicioColas;

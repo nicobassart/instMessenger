@@ -113,7 +113,7 @@ public class AgendaBean extends Bean {
 
 	public void agregarPersona(ActionEvent event) {
 		Persona persona = new Persona();
-		persona.setEstado("ACTIVO");
+		persona.setEstado("true");
 		if (selectedAgenda != null)// Fue por el detalle
 			selectedAgenda.getPersonas().add(persona);
 		else

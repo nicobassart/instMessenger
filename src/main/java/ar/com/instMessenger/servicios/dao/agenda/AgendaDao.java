@@ -31,8 +31,8 @@ public class AgendaDao implements IAgendaDao,Serializable{
 	}
 	
 	public Agenda find(String value) {
-		Query newQuery =em.createQuery("from Agenda as agenda where nombre = ?");
-		newQuery.setParameter(1, value);
+		Query newQuery =em.createQuery("from Agenda as agenda where id_agenda = ?");
+		newQuery.setParameter(1, new Integer(value));
 		List<Agenda> resultList = newQuery.getResultList();
 		return resultList.get(0);
 	}

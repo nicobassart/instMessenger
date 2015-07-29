@@ -8,8 +8,15 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <body>
-	
 	<f:view>
+		<h:outputStylesheet>
+			.ui-icon-check {
+			    background-image: url(../images/success_icon_16x16.png) !important; 
+			}
+			.ui-icon-trash {
+			    background-image: url(../images/cancel.png) !important;
+			}
+		</h:outputStylesheet>
 		<ui:composition template="/pages/template.xhtml">
 
 			<ui:define name="body">
@@ -132,26 +139,22 @@
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
-												<p:column headerText="Estado" style="width:10%" >
+												<p:column headerText="Enviar"  style="width:10%;text-align: center" >
 													<p:cellEditor>
-														<f:facet name="output">
-															<p:selectBooleanCheckbox value="#{persona.estado}" disabled="true"	/>
+														<f:facet name="output"  >
+															<p:selectBooleanCheckbox id="columEnviarOutput" value="#{persona.estado}" disabled="true" />
+															<p:tooltip for="columEnviarOutput" value="Si se encuentra activo el el mensaje sera enviado." />
 														</f:facet>
-														<f:facet name="input" >
-															<p:selectBooleanCheckbox value="#{persona.estado}"	/>
-<!-- 																<f:selectItem itemLabel="Select One" itemValue="" />
-																<f:selectItem itemLabel="Activo" itemValue="ACTIVO" />
-																<f:selectItem itemLabel="Inactivo" itemValue="INACTIVO" />
- 															</p:selectBooleanCheckbox >
- 															-->
+														<f:facet name="input"  style="center" >
+															<p:selectBooleanCheckbox id="columEnviarInput" value="#{persona.estado}" />
+															<p:tooltip for="columEnviarInput" value="Si se encuentra activo el el mensaje sera enviado." />
 														</f:facet>
 													</p:cellEditor>
 												</p:column>
-												<p:column headerText="Opciones" style="width:10%"  >
-													<p:rowEditor  />
-													<h:commandLink
-														action="#{personaBean.eliminarPersona(persona)}"
-														update="personasList">
+												<p:column headerText="Opciones" style="width:10%;text-align: center"  >
+													<p:rowEditor id="opcionesrow" style="text-align: center" >
+													</p:rowEditor>
+													<h:commandLink action="#{personaBean.eliminarPersona(persona)}" id="opciones" update="personasList" style="text-align: center" >
 														<span class="ui-icon ui-icon-trash"></span>
 													</h:commandLink>
 												</p:column>
@@ -163,7 +166,7 @@
  														oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()}); " />
 <!-- 														oncomplete="widgetVar.getPaginator().setPage(widgetVar.getPaginator().getRowCount()/7);" /> -->
 														<!-- oncomplete="alert(widgetVar.getPaginator().getLastPageLink())" /> -->
-														<p:commandButton value="Borrar Tabla" style="width: 200px;font-size:80%;"
+													<p:commandButton value="Borrar Tabla" style="width: 200px;font-size:80%;"
 															id="btnBorrarPersonas" update=":form:personasList"
 															actionListener="#{personaBean.eliminarPersonas}"
 															icon="ui-icon-trash"
@@ -192,7 +195,7 @@
 						        			<p:selectOneMenu required="false" value="#{personaBean.selectedAgenda}" style="width: 200px;font-size:80%;"  >
 												<f:selectItem itemLabel="Seleccionar" itemValue="" />
 												<f:selectItems value="#{agendaBean.agendas}" var="agenda"
-													itemValue="#{agenda.nombre}" itemLabel="#{agenda.nombre}" />
+													itemValue="#{agenda.id_agenda}" itemLabel="#{agenda.nombre}" />
 											</p:selectOneMenu>
 										</p>
 						        
