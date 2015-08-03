@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,13 +68,22 @@ public class LoginBean implements Serializable {
 			isAdmin = true;
 
 			return "loginOK";
+		} catch (BadCredentialsException ie) {
+			logger.info(ie.getMessage());
+			FacesContext.getCurrentInstance()
+			.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Login Failed",
+							"User Name and Password Not Match!"));
+			FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds()
+			.add("globalMessage");
+			return "/login";
 		} catch (IllegalArgumentException ie) {
 			logger.info("Login Failed on IllegalArgumentException");
 			logger.info(ie.getMessage());
 			FacesContext.getCurrentInstance()
-					.addMessage(
-							"formLogin",
-							new FacesMessage(FacesMessage.SEVERITY_WARN,
+					.addMessage("formLogin:mensajeError",
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
 									"Login Failed",
 									"User Name and Password Not Match!"));
 
