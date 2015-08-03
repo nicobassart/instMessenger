@@ -1,64 +1,126 @@
 <!DOCTYPE html>
 <!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
-<html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"     
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 
 
-    <title>Mensajeados</title>
+	<title>Mensajeados</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://css.mensajeados.com.ar/bootstrap.css" rel="stylesheet"/>
+	<!-- Bootstrap core CSS -->
+	<link href="http://css.mensajeados.com.ar/bootstrap.css" rel="stylesheet" />
 
-    <!-- Custom styles for this template -->
-    <!-- <link href="custom/css/signin.css" rel="stylesheet"  /> -->
+	<!-- Custom styles for this template -->
+	<!-- <link href="custom/css/signin.css" rel="stylesheet"  /> -->
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<!-- Just for debugging purposes. Don't actually copy this line! -->
+	<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-  </h:head>
 
-  <body>
+</h:head>
 
-    <div class="container">
+<body>
+	<header id="header" class="hidden-xs hidden-sm">
+		<div class="well well-sm">
+			<!-- 			<h3 class="txt-color-red login-header-lg">
+					<span id="logo"> <img src="http://img.mensajeados.com.ar/logo_mensajeados.png" alt="Mensajeados" />
+					</span><div  class="center">MENSAJEADOS    </div>
+				</h3> -->
+		</div>
+	</header>
 
-      <h:form id="formLogin" class="form-signin" role="form">
-        <h2 class="form-signin-heading">INGRESO</h2>
-        
-        <p:message for="j_username" />
-        <h:inputText name="username" id="j_username" size="30" requiredMessage="Por favor Ingresar el usuario." value="#{loginBean.userName}" type="text" class="form-control" placeholder="Usuario" required="true" autofocus="true" />
-        <p:watermark for="j_username" value="Usuario *" />
-        <br/>
-        <h:inputSecret name="password" id="j_password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
-        <p:watermark for="j_password" value="Clave *" />
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Recordar</input>
-        </label>
-        <p:commandButton type="submit" id="login" action="#{loginBean.login}" value="Iniciar" styleClass="btn btn-lg btn-primary btn-block" />
-     </h:form>
+	<div class="container">
 
-    </div> <!-- /container -->
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
 
 
-    <!-- Bootstrap core JavaScript
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<h3 class="txt-color-red login-header-lg">
+
+							Bienvenidos  a MENSAJEADOS !
+						</h3>
+						<h5 class="about-heading">
+							Documento Médico de Emergencia <strong>QRE</strong>
+						</h5>
+						<p>
+							El <strong>QRE</strong>, es un Documento Médico de Emergencia, en formato de código QR. Una Excepcional Herramienta de Seguridad y Cobertura Médica que consiste en un Seguro
+							de Salvaguarda que brinda Protección Personal en Situaciones de Emergencias Médicas a quien lo posee. Contiene una Historia Clínica de Emergencia, con Datos de Repercusión
+							Vital, los cuales pueden ser utilizados por Profesionales de la Salud en Situaciones de Emergencias y Urgencias, así como también por parte de Socorristas Casuales para la
+							Inmediata puesta en contacto de Médico a Médico por parte del Sistema de Emergencia que se haya activado. ya sea con Médicos de Gmed, y /o con Médicos de otras Empresas de
+							Emergencias. Quien porte su Documento QRE, estará llevando consigo, a donde quiera que vaya, su Ficha Médica de Emergencia, y en ella, sus datos Médicos más importantes, los
+							cuales pueden significar una Protección Clave en una situación de Urgencia, o de Riesgo de Vida.
+
+						</p>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+				<div class="well padding">
+					<h:form id="formLogin" class="form-signin" role="form">
+						<header>
+							<h2 class="form-signin-heading">INGRESO</h2>
+						</header>
+
+						<fieldset>
+
+							<section>
+								<label class="exampleInputEmail1">Usuario</label>
+								<p:message for="j_username" />
+								<h:inputText name="username" id="j_username" size="30" requiredMessage="Por favor Ingresar el usuario." value="#{loginBean.userName}" type="text" class="form-control"
+									placeholder="Usuario" required="true" autofocus="true"></h:inputText>
+								<p:watermark for="j_username" value="Usuario *" />
+							</section>
+							<section>
+								<label class="exampleInputPassword">Clave</label>
+								<h:inputSecret name="password" id="j_password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
+								<p:watermark for="j_password" value="Clave *" />
+							</section>
+							<section>
+								<div class="checkbox">
+									<label class="checkbox"> <input type="checkbox" value="remember"><i></i>Recordar</input></label>
+								</div>
+							</section>
+							<DIV align="right">
+								<h:messages style="color:red;margin:12px;" />
+							</DIV>
+						</fieldset>
+						<footer>
+							<p:commandButton type="submit" id="login" action="#{loginBean.login}" value="Iniciar" styleClass="btn btn-lg btn-primary btn-block" />
+						</footer>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 		<div class="row">
+
+
+		</div> -->
+	</div>
+	<!-- /container -->
+
+
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  
+	<!-- Placed at the end of the document so the pages load faster -->
 
-</body></html>
+
+</body>
+</html>
