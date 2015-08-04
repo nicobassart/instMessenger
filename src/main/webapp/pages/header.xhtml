@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	<style type="text/css">
+ 	<style type="text/css">
 		.right {
 			display: inline;
 			float: right;
@@ -30,25 +27,55 @@
 		}
 	</style>
 	<h:form>
+	<div class="ui-grid ui-grid-responsive" >
+		<div class="ui-grid-row" align="center">
+		    <div class="ui-grid-col-4" >
+		   <a href="http://www.techresources.com.ar" target="blank"><img
+			src="http://img.mensajeados.com.ar/logo_mensajeados.png" /></a>
+			<div  class="center">MENSAJEADOS    </div>
+		    </div>
+		    <div class="ui-grid-col-4" >
+		   <small><h4><h:graphicImage value="http://img.mensajeados.com.ar/persona.png" /><h:outputText value=" #{usuarioBean.userName}   "  /> </h4></small>
+		    </div>
+		    <div class="ui-grid-col-4" >
+		    <p:commandLink actionListener="#{loginBean.homePage}" >
+			<h:graphicImage value="http://img.mensajeados.com.ar/home.png" />
+		</p:commandLink>
+		    </div>
+		    <div class="ui-grid-col-4" >
+		    <p class="text-right">
+		    		<p:commandLink action="#{loginBean.logout}">
+			<h:graphicImage value="http://img.mensajeados.com.ar/salir.png"  />
+		</p:commandLink>
+</p>
+		    </div>
+	    </div>
+	</div>
+		    
+		    
+		    
+		    
+		    
+		    
 	
-	<div class="left">
+<!-- 	<div class="left">
 		<a href="http://www.techresources.com.ar" target="blank"><img
 			src="http://img.mensajeados.com.ar/logo_mensajeados.png" /></a>
 	</div>
 	<div  class="center">MENSAJEADOS    </div>
-	
-	<small><h:outputText value="Usuario: #{usuarioBean.userName}" image="ui-icon-carat-1-e" /></small>
+	<small><h:outputText value="Usuario: #{usuarioBean.userName}"  /><h:graphicImage value="http://img.mensajeados.com.ar/persona.png" /></small>
 	<div class="right">
 		<p:commandLink actionListener="#{loginBean.homePage}" >
-			<h:graphicImage value="http://img.mensajeados.com.ar/inicio.png"  height="40"/>
+			<h:graphicImage value="http://img.mensajeados.com.ar/home.png" />
 		</p:commandLink>
 		<label> </label>
  		<p:commandLink action="#{loginBean.logout}">
 			<h:graphicImage value="http://img.mensajeados.com.ar/salir.png"  />
 		</p:commandLink>
-	</div>
+	</div> -->
 	</h:form>
-	
+
+
 <!-- 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">

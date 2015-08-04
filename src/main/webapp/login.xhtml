@@ -17,6 +17,8 @@
 	<!-- Bootstrap core CSS -->
 	<link href="http://css.mensajeados.com.ar/bootstrap.css" rel="stylesheet" />
 
+	<link href="http://css.mensajeados.com.ar/scrolling-nav.css" rel="stylesheet" />
+
 	<!-- Custom styles for this template -->
 	<!-- <link href="custom/css/signin.css" rel="stylesheet"  /> -->
 
@@ -31,14 +33,173 @@
 
 </h:head>
 
-<body>
-	<header id="header" class="hidden-xs hidden-sm">
-		<div class="well well-sm">
-			<!-- 			<h3 class="txt-color-red login-header-lg">
-					<span id="logo"> <img src="http://img.mensajeados.com.ar/logo_mensajeados.png" alt="Mensajeados" />
-					</span><div  class="center">MENSAJEADOS    </div>
-				</h3> -->
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand page-scroll" href="#page-top">MENSAJEADOS</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden"><a class="page-scroll" href="#page-top"></a></li>
+					<!--                     <li>
+                        <a class="page-scroll" href="#intro">Inicio</a>
+                    </li> -->
+					<li><a class="page-scroll" href="#services">Servicios</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Intro Section -->
+	<section id="intro" class="intro-section">
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+
+
+					<h3 class="txt-color-red login-header-lg">
+						<p class="text-left">Bienvenidos a MENSAJEADOS !</p>
+					</h3>
+					<h5>
+						<p class="text-left">
+							 <strong>Mejor comunicados</strong>
+						</p>
+					</h5>
+					<p class="text-left">
+						Realiza campañas vía sms, hacer anuncios, informar deudas, mejorar la comunicacion con su cliente.
+					</p>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+					<div class="well padding">
+						<h:form class="text-left form-signin" role="form">
+							<header>
+								<h2 class="form-signin-heading">INGRESO</h2>
+							</header>
+							<fieldset>
+
+								<section>
+									<label class="exampleInputEmail1">Usuario</label>
+									<p:message for="j_username" />
+									<h:inputText name="username" id="j_username" size="30" requiredMessage="Por favor Ingresar el usuario." value="#{loginBean.userName}" type="text" class="form-control"
+										placeholder="Usuario" required="true" autofocus="true"></h:inputText>
+									<p:watermark for="j_username" value="Usuario *" />
+								</section>
+								<section>
+									<label class="exampleInputPassword">Clave</label>
+									<h:inputSecret name="password" id="j_password" type="password" value="#{loginBean.password}" class="form-control" placeholder="Clave" required="true" />
+									<p:watermark for="j_password" value="Clave *" />
+								</section>
+								<section>
+									<div class="checkbox">
+										<label class="checkbox"> <input type="checkbox" value="remember"><i></i>Recordar</input></label>
+									</div>
+								</section>
+								<DIV align="right">
+									<h:messages id="globalMessage" style="color:red;margin:12px;" />
+								</DIV>
+							</fieldset>
+							<footer>
+								<p:commandButton type="submit" id="login" action="#{loginBean.login}" value="Iniciar" styleClass="btn btn-lg btn-primary btn-block" />
+							</footer>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</section>
+
+	<!-- About Section -->
+	<!--     <section id="about" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About Section</h1>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+	<!-- Services Section -->
+	<section id="services" class="services-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>SECCION DE SERVICIOS PROXIMAMENTE</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<!--     <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Contact Section</h1>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+
+
+
+	<!-- jQuery -->
+	<script src="http://js.mensajeados.com.ar/libs/jquery-2.0.2.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="http://js.mensajeados.com.ar/bootstrap.min.js"></script>
+
+	<!-- Scrolling Nav JavaScript -->
+	<script src="http://js.mensajeados.com.ar/jquery.easing.min.js"></script>
+	<script src="http://js.mensajeados.com.ar/scrolling-nav.js"></script>
+
+
+
+	<!--  version anterior 
+	
+		<header id="header" class="hidden-xs hidden-sm">
+		<div class="well well-sm"></div>
 	</header>
 
 	<div class="container">
@@ -47,27 +208,22 @@
 
 			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
 
-						<h3 class="txt-color-red login-header-lg">
-
-							Bienvenidos  a MENSAJEADOS !
-						</h3>
-						<h5 class="about-heading">
-							Documento Médico de Emergencia <strong>QRE</strong>
-						</h5>
-						<p>
-							El <strong>QRE</strong>, es un Documento Médico de Emergencia, en formato de código QR. Una Excepcional Herramienta de Seguridad y Cobertura Médica que consiste en un Seguro
-							de Salvaguarda que brinda Protección Personal en Situaciones de Emergencias Médicas a quien lo posee. Contiene una Historia Clínica de Emergencia, con Datos de Repercusión
-							Vital, los cuales pueden ser utilizados por Profesionales de la Salud en Situaciones de Emergencias y Urgencias, así como también por parte de Socorristas Casuales para la
-							Inmediata puesta en contacto de Médico a Médico por parte del Sistema de Emergencia que se haya activado. ya sea con Médicos de Gmed, y /o con Médicos de otras Empresas de
-							Emergencias. Quien porte su Documento QRE, estará llevando consigo, a donde quiera que vaya, su Ficha Médica de Emergencia, y en ella, sus datos Médicos más importantes, los
-							cuales pueden significar una Protección Clave en una situación de Urgencia, o de Riesgo de Vida.
-
-						</p>
-
+				<h3 class="txt-color-red login-header-lg">Bienvenidos a MENSAJEADOS !</h3>
+				<h5 class="about-heading">
+					Documento Médico de Emergencia <strong>QRE</strong>
+				</h5>
+				<p>
+					El <strong>QRE</strong>, es un Documento Médico de Emergencia, en formato de código QR. Una Excepcional Herramienta de Seguridad y Cobertura Médica que consiste en un Seguro
+					de Salvaguarda que brinda Protección Personal en Situaciones de Emergencias Médicas a quien lo posee. Contiene una Historia Clínica de Emergencia, con Datos de Repercusión
+					Vital, los cuales pueden ser utilizados por Profesionales de la Salud en Situaciones de Emergencias y Urgencias, así como también por parte de Socorristas Casuales para la
+					Inmediata puesta en contacto de Médico a Médico por parte del Sistema de Emergencia que se haya activado. ya sea con Médicos de Gmed, y /o con Médicos de otras Empresas de
+					Emergencias. Quien porte su Documento QRE, estará llevando consigo, a donde quiera que vaya, su Ficha Médica de Emergencia, y en ella, sus datos Médicos más importantes, los
+					cuales pueden significar una Protección Clave en una situación de Urgencia, o de Riesgo de Vida.
+				</p>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 				<div class="well padding">
-					<h:form  class="form-signin" role="form">
+					<h:form class="form-signin" role="form">
 						<header>
 							<h2 class="form-signin-heading">INGRESO</h2>
 						</header>
@@ -91,7 +247,7 @@
 								</div>
 							</section>
 							<DIV align="right">
-								<h:messages  id="globalMessage" style="color:red;margin:12px;" />
+								<h:messages id="globalMessage" style="color:red;margin:12px;" />
 							</DIV>
 						</fieldset>
 						<footer>
@@ -101,19 +257,7 @@
 				</div>
 			</div>
 		</div>
-
-
-		<!-- 		<div class="row">
-
-
-		</div> -->
-	</div>
-	<!-- /container -->
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+	</div> -->
 
 
 </body>
